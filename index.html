@@ -1,0 +1,2058 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ระบบเรียนรู้กู้ชีพ Math III (Final 1/2569) - พิชิตข้อสอบใน 1 วันสำหรับผู้ไม่มีความรู้</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- KaTeX for crystal clear mathematical equations -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+  <style>
+    :root {
+      --bg: #0b1120;
+      --card: #1e293b;
+      --card-hover: #24344d;
+      --border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --primary: #38bdf8;
+      --primary-dark: #0284c7;
+      --accent: #f59e0b;
+      --accent-green: #10b981;
+      --accent-purple: #a855f7;
+      --danger: #ef4444;
+      --code-bg: #070d19;
+      --highlight: #fef08a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Prompt', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 70px;
+    }
+
+    code, pre, .math-font {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Top Emergency Alert Bar */
+    .emergency-banner {
+      background: linear-gradient(90deg, #b91c1c, #c2410c, #b45309);
+      color: #fff;
+      padding: 10px 0;
+      font-size: 0.95rem;
+      font-weight: 600;
+      box-shadow: 0 2px 10px rgba(185, 28, 28, 0.4);
+    }
+    .emergency-banner .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    /* Header */
+    header {
+      background: rgba(15, 23, 42, 0.92);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0 10px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(14px);
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+    }
+    .badge-primary { background: rgba(56, 189, 248, 0.15); color: var(--primary); border: 1px solid rgba(56, 189, 248, 0.3); }
+    .badge-warning { background: rgba(245, 158, 11, 0.15); color: var(--accent); border: 1px solid rgba(245, 158, 11, 0.3); }
+    .badge-success { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); border: 1px solid rgba(16, 185, 129, 0.3); }
+    .badge-danger { background: rgba(239, 68, 68, 0.15); color: var(--danger); border: 1px solid rgba(239, 68, 68, 0.3); }
+    .badge-purple { background: rgba(168, 85, 247, 0.15); color: var(--accent-purple); border: 1px solid rgba(168, 85, 247, 0.3); }
+
+    /* Nav Tabs */
+    .nav-tabs {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      scrollbar-width: thin;
+    }
+    .nav-tabs::-webkit-scrollbar {
+      height: 4px;
+    }
+    .nav-tabs::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 4px;
+    }
+
+    .tab-btn {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 9px 15px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+    .tab-btn:hover {
+      background: var(--card-hover);
+      color: var(--text);
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+    .tab-btn.active {
+      background: var(--primary-dark);
+      border-color: var(--primary);
+      color: #ffffff;
+      font-weight: 600;
+      box-shadow: 0 4px 14px rgba(56, 189, 248, 0.3);
+    }
+    .tab-btn.urgent {
+      border-color: #ef4444;
+      color: #fca5a5;
+    }
+    .tab-btn.urgent.active {
+      background: #dc2626;
+      border-color: #f87171;
+      color: #fff;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 22px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    .card:hover {
+      border-color: rgba(56, 189, 248, 0.35);
+    }
+
+    .card-emergency {
+      border: 2px solid #ef4444;
+      background: linear-gradient(145deg, #1e293b, #1f1d2b);
+    }
+
+    /* Grids */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    /* Timer Widget */
+    .timer-box {
+      background: linear-gradient(145deg, #1e293b, #0f172a);
+      border: 2px solid var(--primary);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 0 24px rgba(56, 189, 248, 0.15);
+    }
+    .timer-display {
+      font-size: 3.2rem;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--primary);
+      letter-spacing: 2px;
+      margin: 8px 0;
+    }
+    .timer-controls button {
+      background: var(--card-hover);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      margin: 0 4px;
+      transition: all 0.2s;
+    }
+    .timer-controls button:hover {
+      background: var(--primary);
+      color: #0f172a;
+    }
+
+    /* Checklist */
+    .task-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      background: rgba(255, 255, 255, 0.02);
+      border-bottom: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .task-item:hover {
+      background: var(--card-hover);
+    }
+    .task-item input[type="checkbox"] {
+      width: 19px;
+      height: 19px;
+      accent-color: var(--accent-green);
+      cursor: pointer;
+    }
+    .task-item.completed {
+      opacity: 0.6;
+      text-decoration: line-through;
+    }
+
+    /* Math Formula Block */
+    .math-block {
+      background: var(--code-bg);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-left: 4px solid var(--primary);
+      padding: 14px 18px;
+      border-radius: 8px;
+      margin: 12px 0;
+      font-family: 'JetBrains Mono', monospace;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      color: #e2e8f0;
+    }
+
+    .cheat-box {
+      background: rgba(245, 158, 11, 0.07);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-left: 4px solid var(--accent);
+      padding: 14px 18px;
+      border-radius: 8px;
+      margin: 12px 0;
+    }
+
+    .zero-box {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-left: 4px solid var(--accent-green);
+      padding: 14px 18px;
+      border-radius: 8px;
+      margin: 12px 0;
+    }
+
+    .danger-box {
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-left: 4px solid var(--danger);
+      padding: 14px 18px;
+      border-radius: 8px;
+      margin: 12px 0;
+    }
+
+    .step-box {
+      border-left: 3px solid var(--accent);
+      padding-left: 16px;
+      margin: 16px 0;
+    }
+    .step-num {
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    /* Template Box */
+    .template-card {
+      background: #080f1e;
+      border: 1px dashed var(--accent);
+      border-radius: 10px;
+      padding: 16px;
+      margin: 12px 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: #e2e8f0;
+      white-space: pre-wrap;
+    }
+
+    /* Interactive Solver Widget */
+    .solver-box {
+      background: #0f172a;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 12px;
+      padding: 18px;
+      margin: 16px 0;
+    }
+    .solver-input-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .solver-input-row label {
+      font-weight: 600;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    .solver-input-row input {
+      background: #1e293b;
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.95rem;
+      width: 80px;
+    }
+    .solver-btn {
+      background: var(--primary);
+      color: #0f172a;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 6px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.2s;
+    }
+    .solver-btn:hover {
+      background: #7dd3fc;
+    }
+    .solver-output {
+      background: var(--code-bg);
+      border-radius: 8px;
+      padding: 14px 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      margin-top: 10px;
+      display: none;
+      line-height: 1.7;
+    }
+
+    /* Accordion Details */
+    details {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 14px;
+      overflow: hidden;
+    }
+    summary {
+      padding: 14px 18px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--card);
+      transition: background 0.2s;
+    }
+    summary:hover {
+      background: var(--card-hover);
+      color: var(--primary);
+    }
+    details[open] summary {
+      border-bottom: 1px solid var(--border);
+      color: var(--primary);
+    }
+    .details-content {
+      padding: 18px;
+    }
+
+    /* Quiz */
+    .quiz-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .option-btn {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 12px 16px;
+      margin: 8px 0;
+      background: #0f172a;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .option-btn:hover {
+      border-color: var(--primary);
+      background: #1e293b;
+    }
+    .option-btn.correct {
+      background: rgba(16, 185, 129, 0.2) !important;
+      border-color: var(--accent-green) !important;
+      color: #34d399 !important;
+    }
+    .option-btn.wrong {
+      background: rgba(239, 68, 68, 0.2) !important;
+      border-color: var(--danger) !important;
+      color: #f87171 !important;
+    }
+
+    /* Print Cheat Sheet Styling */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        font-size: 8.5pt !important;
+        padding: 0;
+      }
+      header, .emergency-banner, .nav-tabs, .timer-box, .btn-no-print, .non-print {
+        display: none !important;
+      }
+      .tab-pane {
+        display: none !important;
+      }
+      #sheet-tab {
+        display: block !important;
+      }
+      .print-page {
+        padding: 6mm 8mm;
+        margin: 0;
+        width: 100%;
+        page-break-after: always;
+      }
+      .cheat-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+      }
+      .cheat-section {
+        border: 1px solid #444 !important;
+        background: #fff !important;
+        color: #000 !important;
+        padding: 6px 8px !important;
+        border-radius: 3px !important;
+        page-break-inside: avoid;
+        margin-bottom: 5px !important;
+      }
+      .cheat-title {
+        font-size: 9.5pt !important;
+        font-weight: bold !important;
+        color: #000 !important;
+        border-bottom: 1px solid #000 !important;
+        padding-bottom: 2px !important;
+        margin-bottom: 3px !important;
+      }
+      .math-block {
+        background: #f1f5f9 !important;
+        color: #000 !important;
+        border: 1px solid #cbd5e1 !important;
+        padding: 3px 5px !important;
+        font-size: 8pt !important;
+        margin: 3px 0 !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Top Emergency Alert -->
+  <div class="emergency-banner non-print">
+    <div class="container">
+      <div>
+        🚨 <strong>โหมดกู้ชีพเร่งด่วน (Exam Tomorrow!):</strong> ไม่มีความรู้ก็สอบผ่านได้! ทำตามกลยุทธ์เก็บคะแนนสเต็ป ไม่ต้องคิดคำตอบจบครบทุกข้อ
+      </div>
+      <div>
+        <button onclick="switchTab('emergency')" style="background:#fff; color:#b91c1c; border:none; padding:4px 12px; border-radius:6px; font-weight:700; cursor:pointer;">
+          👉 ดูวิธีเอาตัวรอดทันที
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div>
+          <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 6px; flex-wrap:wrap;">
+            <span class="badge badge-primary">KMITL วิศวกรรมศาสตร์</span>
+            <span class="badge badge-warning">Final Exam 1/2569</span>
+            <span class="badge badge-success">ผศ.ดร. เมธา คงพูน</span>
+            <span class="badge badge-danger">1-Day Rescue System</span>
+          </div>
+          <h1 style="font-size: 1.55rem; font-weight: 700; color: #fff;">
+            01046700 Math III: ระบบเรียนรู้ฉุกเฉินสำหรับผู้ไม่มีความรู้ที่ต้องสอบพรุ่งนี้
+          </h1>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <button onclick="switchTab('sheet'); setTimeout(() => window.print(), 300)" class="tab-btn"
+            style="background: var(--accent); color: #000; font-weight: 700; border: none; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);">
+            🖨️ พิมพ์แผ่นสูตร A4 เข้าห้องสอบ
+          </button>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="nav-tabs">
+        <button class="tab-btn urgent active" onclick="switchTab('emergency')">🚨 กู้ชีพฉุกเฉิน (สูตรโกง & Math CPR)</button>
+        <button class="tab-btn" onclick="switchTab('dashboard')">📊 แผน 1 วัน & จับเวลา (Dashboard)</button>
+        <button class="tab-btn" onclick="switchTab('mod1')">⚡ ข้อ 1: สมการ 4 แบบ (40 คะแนน)</button>
+        <button class="tab-btn" onclick="switchTab('mod2')">🌊 ข้อ 2: Laplace + Step (20 คะแนน)</button>
+        <button class="tab-btn" onclick="switchTab('mod3')">🧩 ข้อ 3: ระบบสมการเชิงเส้น (20 คะแนน)</button>
+        <button class="tab-btn" onclick="switchTab('mod4')">⚡ ข้อ 4: วงจร RLC (20 คะแนน)</button>
+        <button class="tab-btn" onclick="switchTab('past-exams')">📚 คลังข้อสอบจริง 64-67</button>
+        <button class="tab-btn" onclick="switchTab('quiz')">🎯 ซ้อมสอบจริง (10 ข้อ)</button>
+        <button class="tab-btn" onclick="switchTab('sheet')">📝 กระดาษจดสูตร A4</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="margin-top: 22px;">
+
+    <!-- ========================================== -->
+    <!-- TAB 1: EMERGENCY RESCUE & MATH CPR         -->
+    <!-- ========================================== -->
+    <div id="emergency-tab" class="tab-pane">
+      
+      <!-- Reality Check & Psychology -->
+      <div class="card card-emergency">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <h2 style="color: #f87171; display:flex; align-items:center; gap:8px;">
+            ⚠️ ความจริงที่ต้องรู้: ถ้าคุณ "ไม่มีความรู้เลย" และต้องสอบพรุ่งนี้!
+          </h2>
+          <span class="badge badge-danger">Survival Priority</span>
+        </div>
+        <p style="font-size: 1.05rem; margin-bottom: 12px; color: #fecaca;">
+          <strong>อย่าตื่นตระหนก! การสอบ Math 3 ไม่ได้วัดว่าคุณต้องคิดเลขเสร็จจนจบทุกข้อถึงจะได้คะแนน</strong>
+        </p>
+        <div class="grid-3" style="margin-top: 14px;">
+          <div style="background: rgba(0,0,0,0.3); padding: 14px; border-radius: 8px; border-left: 4px solid var(--accent-green);">
+            <strong style="color: var(--accent-green);">1. ข้อสอบให้คะแนนตามขั้นตอน (Step Points)</strong>
+            <p style="font-size: 0.88rem; color: #cbd5e1; margin-top: 6px;">
+              ถ้าเขียน "แบบฟอร์มเริ่มต้น", "สมการช่วย", หรือ "สูตรเมทริกซ์" ถูก คุณจะได้ไปแล้ว <strong>50% - 70% ของคะแนนขอนั้น</strong> แม้คำตอบสุดท้ายจะคิดเลขไม่ออก!
+            </p>
+          </div>
+          <div style="background: rgba(0,0,0,0.3); padding: 14px; border-radius: 8px; border-left: 4px solid var(--primary);">
+            <strong style="color: var(--primary);">2. เกณฑ์ผ่าน (ตัด F) อยู่ที่ประมาณ 40-50 คะแนน</strong>
+            <p style="font-size: 0.88rem; color: #cbd5e1; margin-top: 6px;">
+              เป้าหมายคืนนี้ไม่ใช่ 100 เต็ม แต่คือการ <strong>"ฟัน 50-65 คะแนนแบบชัวร์ๆ"</strong> ด้วยการเลือกเก็บข้อง่ายก่อนตามลำดับยุทธศาสตร์
+            </p>
+          </div>
+          <div style="background: rgba(0,0,0,0.3); padding: 14px; border-radius: 8px; border-left: 4px solid var(--accent);">
+            <strong style="color: var(--accent);">3. พกกระดาษจดสูตร A4 เข้าห้องสอบได้ 1 แผ่น!</strong>
+            <p style="font-size: 0.88rem; color: #cbd5e1; margin-top: 6px;">
+              อ.เมธา อนุญาตให้นำ <strong>แผ่นจดสูตร A4 เข้าห้องสอบได้ 1 แผ่น</strong> เราจัดทำแผ่นสูตรสำเร็จรูปที่ตรงแนวสอบ 100% ไว้ให้กดพิมพ์ได้ทันทีใน Tab สุดท้าย!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Priority Order to take the exam -->
+      <div class="card">
+        <h2 style="color: var(--accent); margin-bottom: 14px;">🎯 ลำดับการทำข้อสอบพรุ่งนี้ (Triage Priority: เก็บแต้มง่ายสุดไปยากสุด)</h2>
+        <p style="color: var(--text-muted); margin-bottom: 16px;">
+          เมื่อเปิดกระดาษข้อสอบมา <strong>ห้ามทำเรียง 1a -> 1b -> 1c เด็ดขาด!</strong> ให้เปิดทำตามลำดับนี้เพื่อการันตีคะแนนผ่านตั้งแต่ชั่วโมงแรก:
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 14px; border-radius: 8px;">
+            <div style="display: flex; justify-content: space-between;">
+              <strong style="color: var(--accent-green); font-size: 1.05rem;">อันดับ 1: ข้อ 1(c) Cauchy-Euler (10 คะแนน)</strong>
+              <span class="badge badge-success">ง่ายที่สุด ได้แต้มชัวร์ 6-10 แต้ม</span>
+            </div>
+            <p style="font-size: 0.9rem; margin-top: 4px;">
+              วิธีทำ: สมมติ $y = x^m \implies$ เขียนสมการช่วย $am(m-1)+bm+c=0$ แยกตัวประกอบกำลังสอง ได้ $y_h$ ทันทีใน 3 นาที! (ได้แล้ว 5 คะแนน)
+            </p>
+          </div>
+
+          <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 14px; border-radius: 8px;">
+            <div style="display: flex; justify-content: space-between;">
+              <strong style="color: var(--accent-green); font-size: 1.05rem;">อันดับ 2: ข้อ 1(b) Bernoulli Equation (10 คะแนน)</strong>
+              <span class="badge badge-success">สูตรสำเร็จตายตัว 6-10 แต้ม</span>
+            </div>
+            <p style="font-size: 0.9rem; margin-top: 4px;">
+              วิธีทำ: หารด้วย $y^n \implies$ แทนตัวแปร $v = y^{1-n} \implies$ กลายเป็นสมการเชิงเส้นอันดับ 1 ใช้สูตร Integrating factor ทันที
+            </p>
+          </div>
+
+          <div style="background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.3); padding: 14px; border-radius: 8px;">
+            <div style="display: flex; justify-content: space-between;">
+              <strong style="color: var(--primary); font-size: 1.05rem;">อันดับ 3: ข้อ 4(a) Initial Conditions วงจร RLC (5 คะแนน)</strong>
+              <span class="badge badge-primary">คิดแบบ ม.ปลาย ไม่ใช้แคลคูลัส 5 แต้มเต็ม</span>
+            </div>
+            <p style="font-size: 0.9rem; margin-top: 4px;">
+              วิธีทำ: ที่ $t < 0$ ไฟกระแสตรง (DC): ตัว $L$ กลายเป็น "สายไฟเปล่า (Short)", ตัว $C$ กลายเป็น "สายขาด (Open)" แล้วหา $i_L(0), v_C(0)$
+            </p>
+          </div>
+
+          <div style="background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.3); padding: 14px; border-radius: 8px;">
+            <div style="display: flex; justify-content: space-between;">
+              <strong style="color: var(--primary); font-size: 1.05rem;">อันดับ 4: ข้อ 3 State-Space Representation (20 คะแนน)</strong>
+              <span class="badge badge-primary">ตั้งเมทริกซ์ + หา Eigenvalues ได้ 10-12 แต้ม</span>
+            </div>
+            <p style="font-size: 0.9rem; margin-top: 4px;">
+              วิธีทำ: กำหนด $x_1 = y, x_2 = y'$ เขียนเมทริกซ์ $A = \begin{bmatrix} 0 & 1 \\ -q & -p \end{bmatrix}$ แล้วแก้ $\det(A - \lambda I) = 0$
+            </p>
+          </div>
+
+          <div style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); padding: 14px; border-radius: 8px;">
+            <div style="display: flex; justify-content: space-between;">
+              <strong style="color: var(--accent); font-size: 1.05rem;">อันดับ 5: ข้อ 1(a) Exact Differential Eq. (10 คะแนน)</strong>
+              <span class="badge badge-warning">เช็ค $\partial M/\partial y = \partial N/\partial x$</span>
+            </div>
+            <p style="font-size: 0.9rem; margin-top: 4px;">
+              วิธีทำ: เช็คดิฟย่อย ถ้าเท่ากันอินทิเกรตหา $F(x,y)=C$ ถ้าไม่เท่ากันใช้สูตรหา $\mu(x)$ หรือ $\mu(y)$ แล้วคูณตลอด
+            </p>
+          </div>
+
+          <div style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); padding: 14px; border-radius: 8px;">
+            <div style="display: flex; justify-content: space-between;">
+              <strong style="color: var(--accent); font-size: 1.05rem;">อันดับ 6: ข้อ 2 Laplace Transform IVP with Step Input (20 คะแนน)</strong>
+              <span class="badge badge-warning">เขียนรูป $u(t-c)$ + เทค Laplace ได้ 8-12 แต้ม</span>
+            </div>
+            <p style="font-size: 0.9rem; margin-top: 4px;">
+              วิธีทำ: เขียน $f(t) = g(t)[u(t-a)-u(t-b)]$ แล้วเทค Laplace แปลง $\mathcal{L}\{y''\} = s^2Y(s) - sy(0) - y'(0)$
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Emergency Answer Template Generator -->
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap:wrap; gap:10px;">
+          <h2 style="color: var(--primary);">📝 ลายแทงแพทเทิร์นเขียนตอบในสมุดคำตอบ (Partial Credit Grabber)</h2>
+          <span class="badge badge-primary">เขียนตามนี้ได้แต้มทันที 50-70%</span>
+        </div>
+        <p style="color: var(--text-muted); margin-bottom: 14px;">
+          สำหรับคนที่ไม่รู้จะเริ่มยังไง ให้เลือกหัวข้อด้านล่าง แล้วจำโครงสร้างนี้ไปเขียนบรรทัดแรกในสมุดคำตอบ:
+        </p>
+
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px;">
+          <button class="solver-btn" onclick="showTemplate('ce')">ข้อ 1(c) Cauchy-Euler</button>
+          <button class="solver-btn" onclick="showTemplate('bern')">ข้อ 1(b) Bernoulli</button>
+          <button class="solver-btn" onclick="showTemplate('exact')">ข้อ 1(a) Exact / IF</button>
+          <button class="solver-btn" onclick="showTemplate('ss')">ข้อ 3 State-Space</button>
+          <button class="solver-btn" onclick="showTemplate('laplace')">ข้อ 2 Laplace Step</button>
+          <button class="solver-btn" onclick="showTemplate('rlc')">ข้อ 4 วงจร RLC</button>
+        </div>
+
+        <pre id="template-display" class="template-card">
+คลิกเลือกหัวข้อด้านบนเพื่อดูแบบฟอร์มการเขียนตอบที่อาจารย์ตรวจให้คะแนน
+        </pre>
+      </div>
+
+      <!-- Math CPR (10-minute Essential Math) -->
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+          <h2 style="color: var(--primary);">🫀 Math CPR: ปั๊มหัวใจคณิตศาสตร์ 10 นาที (ทวนสูตรที่ลืมหมดแล้ว)</h2>
+          <span class="badge badge-primary">Essential Prerequisite</span>
+        </div>
+        <p style="color: var(--text-muted); margin-bottom: 16px;">
+          สำหรับคนที่ไม่แตะคณิตศาสตร์มานาน นี่คือ <strong>5 ทักษะพื้นฐาน</strong> ที่ต้องใช้ในการสอบ Math 3 ข้อสอบไม่ออกเกินนี้แน่นอน:
+        </p>
+
+        <div class="grid-2">
+          <!-- Skill 1: Basic Derivatives -->
+          <div class="zero-box">
+            <h4 style="color: var(--accent-green); margin-bottom: 8px;">1. สูตรดิฟที่ต้องใช้ในห้องสอบ</h4>
+            <ul style="margin-left: 20px; font-size: 0.9rem; line-height: 1.8;">
+              <li>$\frac{d}{dx}(x^n) = n x^{n-1}$ (เช่น $\frac{d}{dx}(x^3) = 3x^2$)</li>
+              <li>$\frac{d}{dx}(\text{ค่าคงที่}) = 0$ (เช่น $\frac{d}{dx}(5) = 0$)</li>
+              <li>$\frac{d}{dx}(e^{kx}) = k e^{kx}$ (เช่น $\frac{d}{dx}(e^{3x}) = 3e^{3x}$)</li>
+              <li>$\frac{d}{dx}(\sin kx) = k \cos kx$</li>
+              <li>$\frac{d}{dx}(\cos kx) = -k \sin kx$ (มีเครื่องหมายลบ!)</li>
+              <li>$\frac{d}{dx}(\ln x) = \frac{1}{x}$</li>
+              <li><strong>อนุพันธ์ย่อย (Partial Diff):</strong> มองตัวแปรอื่นเป็นตัวเลขธรรมดา เช่น $\frac{\partial}{\partial y}(3xy - y^2) = 3x(1) - 2y = 3x - 2y$</li>
+            </ul>
+          </div>
+
+          <!-- Skill 2: Basic Integrals -->
+          <div class="zero-box">
+            <h4 style="color: var(--accent-green); margin-bottom: 8px;">2. สูตรอินทิเกรตที่ต้องใช้ในห้องสอบ</h4>
+            <ul style="margin-left: 20px; font-size: 0.9rem; line-height: 1.8;">
+              <li>$\int x^n dx = \frac{x^{n+1}}{n+1} + C$ (เช่น $\int x^2 dx = \frac{x^3}{3}$)</li>
+              <li>$\int \frac{1}{x} dx = \ln|x| + C$</li>
+              <li>$\int e^{kx} dx = \frac{1}{k} e^{kx} + C$ (เช่น $\int e^{2x} dx = \frac{e^{2x}}{2}$)</li>
+              <li>$\int \cos(kx) dx = \frac{1}{k}\sin(kx)$</li>
+              <li>$\int \sin(kx) dx = -\frac{1}{k}\cos(kx)$</li>
+              <li><strong>สูตรตัดล็อก:</strong> $e^{\ln(A)} = A$ และ $e^{k \ln x} = e^{\ln(x^k)} = x^k$</li>
+            </ul>
+          </div>
+
+          <!-- Skill 3: Quadratic Formula -->
+          <div class="cheat-box">
+            <h4 style="color: var(--accent); margin-bottom: 8px;">3. การแก้สมการกำลังสอง $am^2 + bm + c = 0$</h4>
+            <p style="font-size: 0.9rem; margin-bottom: 6px;">ใช้ในการหาค่า $m$ ของ Cauchy-Euler และหาค่า $\lambda$ ของระบบสมการเชิงเส้น:</p>
+            <div class="math-block">
+              m = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">
+              ตัวอย่าง: $m^2 - 4m + 3 = 0 \implies (m - 1)(m - 3) = 0 \implies m = 1, 3$<br>
+              ถ้าในรูทติดลบ $\sqrt{-4} = 2i \implies$ เป็นรากเชิงซ้อน $\alpha \pm \beta i$
+            </p>
+          </div>
+
+          <!-- Skill 4: Matrix 2x2 Determinant -->
+          <div class="cheat-box">
+            <h4 style="color: var(--accent); margin-bottom: 8px;">4. การหา Determinant ของเมทริกซ์ 2x2</h4>
+            <p style="font-size: 0.9rem; margin-bottom: 6px;">ใช้หา Wronskian $W$ และหา Eigenvalues $\det(A - \lambda I) = 0$:</p>
+            <div class="math-block">
+              \det \begin{bmatrix} a & b \\ c & d \end{bmatrix} = ad - bc \quad \text{(คูณลง ลบ คูณขึ้น)}
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">
+              ตัวอย่าง: $\det \begin{bmatrix} -\lambda & 1 \\ -6 & -5-\lambda \end{bmatrix} = (-\lambda)(-5-\lambda) - (1)(-6) = \lambda^2 + 5\lambda + 6 = 0$
+            </p>
+          </div>
+        </div>
+
+        <!-- Skill 5: Tabular Integration (DI Method) -->
+        <div class="card" style="margin-top: 16px; background: rgba(15, 23, 42, 0.8);">
+          <h4 style="color: var(--primary); margin-bottom: 8px;">⚡ ทริคลัดขั้นเทพ: อินทิเกรต By Parts ด้วยวิธีตาราง (DI Method)</h4>
+          <p style="font-size: 0.9rem; margin-bottom: 10px;">
+            เมื่อเจอ $\int x^2 e^x dx$ หรือ $\int x \cos x dx$ ในข้อสอบ <strong>ห้ามใช้สูตร $\int u dv$ ซ้ำๆ จะคิดเลขผิดแน่นอน</strong> ให้ตีตาราง 2 คอลัมน์:
+          </p>
+          <div class="grid-2">
+            <div>
+              <table style="width: 100%; border-collapse: collapse; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem;">
+                <tr style="background: rgba(56, 189, 248, 0.2); border-bottom: 1px solid var(--border);">
+                  <th style="padding: 6px;">เครื่องหมาย</th>
+                  <th style="padding: 6px;">D (ดิฟจนเป็น 0)</th>
+                  <th style="padding: 6px;">I (อินทิเกรต)</th>
+                </tr>
+                <tr><td style="color:var(--accent-green);">+</td><td>$x^2$</td><td>$e^x$</td></tr>
+                <tr><td style="color:var(--danger);">-</td><td>$2x$</td><td>$e^x$</td></tr>
+                <tr><td style="color:var(--accent-green);">+</td><td>$2$</td><td>$e^x$</td></tr>
+                <tr><td style="color:var(--danger);">-</td><td>$0$</td><td>$e^x$</td></tr>
+              </table>
+            </div>
+            <div style="font-size: 0.9rem; line-height: 1.8;">
+              <p><strong>วิธีอ่านผลลัพธ์:</strong> คูณไขว้เฉียงลงมาตามเครื่องหมาย!</p>
+              <code>= (+)(x²)(e^x) + (-)(2x)(e^x) + (+)(2)(e^x)</code><br>
+              <strong>คำตอบ: $(x^2 - 2x + 2)e^x + C$</strong> (ใช้เวลาแค่ 15 วินาที!)
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 2: DASHBOARD & SCHEDULE & TIMER        -->
+    <!-- ========================================== -->
+    <div id="dashboard-tab" class="tab-pane" style="display:none;">
+      <div class="grid-2">
+        <!-- Timer -->
+        <div class="timer-box">
+          <div style="font-size: 0.9rem; color: var(--text-muted); font-weight: 500;">นาฬิกาจับเวลาอ่านหนังสือรอบละ 50 นาที (Pomodoro Block)</div>
+          <div id="timer-label" style="font-size: 1.15rem; font-weight: 600; color: var(--accent); margin-top: 6px;">
+            Block ปัจจุบัน: ติวเข้ม 1 วันก่อนสอบ
+          </div>
+          <div class="timer-display" id="timer-display">50:00</div>
+          <div class="timer-controls">
+            <button onclick="startTimer()">▶ เริ่มจับเวลา</button>
+            <button onclick="pauseTimer()">⏸ หยุดชั่วคราว</button>
+            <button onclick="resetTimer(50)">🔄 50 นาที</button>
+            <button onclick="resetTimer(25)">🍅 25 นาที</button>
+          </div>
+        </div>
+
+        <!-- Progress Overview -->
+        <div class="card" style="margin-bottom: 0;">
+          <h3 style="color: var(--primary); margin-bottom: 8px;">โอกาสรอดตายของคุณ (Readiness Tracker)</h3>
+          <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 14px;">
+            ติ๊กเครื่องหมายเมื่ออ่านและฝึกเขียน Template ในหัวข้อนั้นๆ ได้แล้ว
+          </p>
+          <div style="background: #070d19; height: 14px; border-radius: 999px; overflow: hidden; margin-bottom: 12px; border: 1px solid var(--border);">
+            <div id="progress-bar" style="background: linear-gradient(90deg, #ef4444, #f59e0b, #10b981); width: 0%; height: 100%; transition: width 0.3s ease;"></div>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-weight: 600; font-size: 0.92rem;">
+            <span>คะแนนสะสมที่พร้อม: <span id="ready-score" style="color: var(--accent); font-size: 1.2rem;">0</span> / 100 คะแนน</span>
+            <span id="ready-percent" style="color: var(--accent-green); font-size: 1.2rem;">0%</span>
+          </div>
+          <div id="status-message" style="margin-top: 10px; font-size: 0.85rem; color: #fca5a5;">
+            ⚠️ สถานะปัจจุบัน: ยังไม่พร้อมสอบ! ให้เริ่มติ๊กหัวข้อ Cauchy-Euler และ Bernoulli ด่วน
+          </div>
+        </div>
+      </div>
+
+      <!-- Schedule Timeline -->
+      <div class="card" style="margin-top: 22px;">
+        <h2 style="margin-bottom: 14px; font-size: 1.25rem; color: #fff;">⏰ แผนปฏิบัติการติวเข้ม 1 วัน (Master Timeline)</h2>
+
+        <div class="task-item" onclick="toggleTask(this, 10)">
+          <input type="checkbox" onchange="updateProgress()">
+          <div>
+            <strong>08:30 - 09:30 | ข้อ 1(a) Exact Differential Eq. & Integrating Factors (10 คะแนน)</strong>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">เช็ค dM/dy = dN/dx, หา mu(x) หรือ mu(y), ฝึกโจทย์ปี 66/67</p>
+          </div>
+        </div>
+
+        <div class="task-item" onclick="toggleTask(this, 10)">
+          <input type="checkbox" onchange="updateProgress()">
+          <div>
+            <strong>09:30 - 10:30 | ข้อ 1(b) Bernoulli Equation (10 คะแนน)</strong>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">เทคนิคแทนตัวแปร v = y^(1-n), แปลงเป็นเชิงเส้นอันดับ 1 แล้วใช้ Integrating Factor</p>
+          </div>
+        </div>
+
+        <div class="task-item" onclick="toggleTask(this, 10)">
+          <input type="checkbox" onchange="updateProgress()">
+          <div>
+            <strong>10:30 - 11:15 | ข้อ 1(c) Cauchy-Euler Equation Non-homogeneous (10 คะแนน)</strong>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">หา y_h ด้วยสมการช่วย m(m-1)+..., หา y_p ด้วย Variation of Parameters (อย่าลืมหาร a*x^2 ก่อนหา f(x))</p>
+          </div>
+        </div>
+
+        <div class="task-item" onclick="toggleTask(this, 10)">
+          <input type="checkbox" onchange="updateProgress()">
+          <div>
+            <strong>11:15 - 12:00 | ข้อ 1(d) Higher-Order Non-homogeneous ODEs (10 คะแนน)</strong>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Undetermined Coefficients & Variation of Parameters (เช่นปี 66 ที่มี e^x/(1+e^x))</p>
+          </div>
+        </div>
+
+        <div class="task-item" onclick="toggleTask(this, 20)">
+          <input type="checkbox" onchange="updateProgress()">
+          <div>
+            <strong>13:00 - 15:30 | ข้อ 2 Laplace Transform IVP with Step Input (20 คะแนน)</strong>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">แปลงฟังก์ชันชิ้นส่วน f(t) ในรูป u(t-c), ทฤษฎีบทการเลื่อนที่สอง (Second Shifting), แยกเศษส่วนย่อย</p>
+          </div>
+        </div>
+
+        <div class="task-item" onclick="toggleTask(this, 20)">
+          <input type="checkbox" onchange="updateProgress()">
+          <div>
+            <strong>15:45 - 18:15 | ข้อ 3 ระบบสมการเชิงเส้นอันดับหนึ่ง + Undetermined Coeff. (20 คะแนน)</strong>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">ตั้งตัวแปรสถานะ x1=y, x2=y', เมทริกซ์ A, หา Eigenvalues/Eigenvectors, สมมติเวกเตอร์ xp</p>
+          </div>
+        </div>
+
+        <div class="task-item" onclick="toggleTask(this, 20)">
+          <input type="checkbox" onchange="updateProgress()">
+          <div>
+            <strong>19:15 - 22:00 | ข้อ 4 วงจรไฟฟ้า RLC: Zero-Input & Zero-State Response (20 คะแนน)</strong>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">หา iL(0), vC(0), diL/dt(0), ตั้ง KVL/KCL หา ODE ของ iL(t), แยกตอบ Zero-Input (source=0) และ Zero-State (IC=0)</p>
+          </div>
+        </div>
+
+        <div class="task-item" onclick="toggleTask(this, 0)">
+          <input type="checkbox" onchange="updateProgress()">
+          <div>
+            <strong>22:15 - 23:45 | ตรวจสอบและพิมพ์กระดาษจดสูตร A4 1 แผ่นเข้าห้องสอบ</strong>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">สูตร Integrating Factor, ตารางคู่ Laplace, สูตรรากสมการ RLC, วิธีสมมติเวกเตอร์ xp</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 3: MODULE 1 (40 MARKS)                 -->
+    <!-- ========================================== -->
+    <div id="mod1-tab" class="tab-pane" style="display:none;">
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap:wrap; gap:10px;">
+          <h2>ข้อ (1) สมการอนุพันธ์ 4 รูปแบบ (40 คะแนนเต็ม)</h2>
+          <span class="badge badge-primary">น้ำหนักคะแนน 40% ของทั้งฉบับ</span>
+        </div>
+        <p style="color: var(--text-muted); margin-bottom: 18px;">
+          ข้อนี้แบ่งเป็น 4 ข้อย่อย ข้อย่อยละ 10 คะแนน เป็นพาร์ทที่คนไม่มีพื้นฐาน <strong>"ต้องเก็บคะแนนให้ได้อย่างน้อย 25-30 คะแนน"</strong> เพราะโจทย์มีรูปแบบแพทเทิร์นตายตัว
+        </p>
+
+        <!-- 1a: Exact -->
+        <details open>
+          <summary>1. a) Exact Differential Equations & Integrating Factor (10 คะแนน)</summary>
+          <div class="details-content">
+            <div class="math-block">
+              รูปแบบมาตรฐาน: $M(x, y)\,dx + N(x, y)\,dy = 0$
+            </div>
+            
+            <div class="zero-box">
+              <strong style="color: var(--accent-green);">💡 อธิบายสำหรับคนไม่มีพื้นฐาน:</strong>
+              สมการนี้จะแบ่งเป็น 2 ก้อน ก้อนหน้าติดกับ $dx$ เรียกมันว่า $M$ ส่วนก้อนที่ติดกับ $dy$ เรียกมันว่า $N$
+            </div>
+
+            <div class="step-box">
+              <div class="step-num">Step 1: ตรวจสอบความเป็น Exact</div>
+              คำนวณอนุพันธ์ย่อย (ดิฟ $M$ เทียบ $y$ โดยมอง $x$ เป็นตัวเลข, และดิฟ $N$ เทียบ $x$ โดยมอง $y$ เป็นตัวเลข):
+              <div class="math-block">
+                \frac{\partial M}{\partial y} = \frac{\partial N}{\partial x} \quad \Longleftarrow \text{ถ้าเท่ากัน แสดงว่าเป็น Exact ทันที!}
+              </div>
+            </div>
+
+            <div class="step-box">
+              <div class="step-num">Step 2: หากไม่เท่ากัน ต้องหา Integrating Factor $\mu$ (ตัวประกอบปริพันธ์)</div>
+              สูตรเช็ค 2 แบบ:
+              <ul style="margin-left: 20px; line-height: 1.8;">
+                <li>แบบที่ 1: $\frac{\frac{\partial M}{\partial y} - \frac{\partial N}{\partial x}}{N} = f(x)$ (ต้องเหลือแค่ตัวแปร $x$ ล้วนๆ) $\implies \mathbf{\mu(x) = e^{\int f(x)\,dx}}$</li>
+                <li>แบบที่ 2: $\frac{\frac{\partial N}{\partial x} - \frac{\partial M}{\partial y}}{M} = g(y)$ (ต้องเหลือแค่ตัวแปร $y$ ล้วนๆ) $\implies \mathbf{\mu(y) = e^{\int g(y)\,dy}}$</li>
+              </ul>
+              เมื่อได้ $\mu$ แล้ว นำไปคูณตลอดทั้งสมการ สมการใหม่จะเป็น Exact แน่นอน 100%!
+            </div>
+
+            <div class="step-box">
+              <div class="step-num">Step 3: หาฟังก์ชันผลเฉลย $F(x, y) = C$</div>
+              <div class="math-block">
+                F(x, y) = \int M\,dx + h(y) \quad \text{จากนั้นหา } h(y) \text{ โดยดิฟเทียบ } y: \; \frac{\partial F}{\partial y} = N(x, y)
+              </div>
+            </div>
+
+            <div class="cheat-box">
+              <strong>📝 ตัวอย่างจากข้อสอบจริงปี 2567 (ข้อ 6):</strong>
+              <div class="math-block">(3xy - y^2)\,dx + x(x - y)\,dy = 0</div>
+              <strong>วิธีทำ:</strong><br>
+              1. $M = 3xy - y^2 \implies \frac{\partial M}{\partial y} = 3x - 2y$<br>
+              2. $N = x^2 - xy \implies \frac{\partial N}{\partial x} = 2x - y$<br>
+              3. เช็ค: $\frac{\partial M}{\partial y} - \frac{\partial N}{\partial x} = (3x - 2y) - (2x - y) = x - y$<br>
+              4. เอาไปหาร $N$: $\frac{x - y}{x(x - y)} = \frac{1}{x} = f(x)$<br>
+              5. หา Integrating Factor: $\mu(x) = e^{\int \frac{1}{x}\,dx} = e^{\ln x} = x$<br>
+              6. คูณ $x$ ตลอดสมการ: $(3x^2y - xy^2)\,dx + (x^3 - x^2y)\,dy = 0$<br>
+              7. อินทิเกรตหา $F(x, y) = \int (3x^2y - xy^2)\,dx = x^3y - \frac{1}{2}x^2y^2 + h(y)$<br>
+              ดิฟเทียบ $y$: $\frac{\partial F}{\partial y} = x^3 - x^2y + h'(y) = x^3 - x^2y \implies h'(y) = 0 \implies h(y) = C_1$<br>
+              <strong>คำตอบสมบูรณ์: $x^3y - \frac{1}{2}x^2y^2 = C$</strong>
+            </div>
+          </div>
+        </details>
+
+        <!-- 1b: Bernoulli -->
+        <details>
+          <summary>1. b) Bernoulli Equation (10 คะแนน)</summary>
+          <div class="details-content">
+            <div class="math-block">
+              รูปแบบมาตรฐาน: \frac{dy}{dx} + P(x)y = Q(x)y^n \quad (\text{โดยที่ } n \ne 0, 1)
+            </div>
+
+            <div class="zero-box">
+              <strong style="color: var(--accent-green);">💡 วิธีสังเกต Bernoulli ใน 2 วินาที:</strong>
+              หน้าตามันจะคล้ายสมการเชิงเส้น $y' + P(x)y = Q(x)$ ทุกประการ <strong>แต่ด้านขวามือมี $y^n$ โผล่มาคูณอยู่!</strong>
+            </div>
+
+            <div class="step-box">
+              <div class="step-num">ขั้นตอนวิธีทำ 4 สเต็ปมาตรฐาน:</div>
+              <ol style="margin-left: 20px; line-height: 1.9;">
+                <li>นำ $y^n$ หารตลอดทั้งสองข้างของสมการ:
+                  <div class="math-block">y^{-n}\frac{dy}{dx} + P(x)y^{1-n} = Q(x)</div>
+                </li>
+                <li>กำหนดตัวแปรใหม่เสมอ: <strong>$v = y^{1-n}$</strong></li>
+                <li>หาอนุพันธ์: $\frac{dv}{dx} = (1-n)y^{-n}\frac{dy}{dx} \implies y^{-n}\frac{dy}{dx} = \frac{1}{1-n}\frac{dv}{dx}$</li>
+                <li>แทนค่ากลับลงไป จะได้สมการเชิงเส้นอันดับ 1 ในรูปตัวแปร $v$:
+                  <div class="math-block">\frac{dv}{dx} + (1-n)P(x)v = (1-n)Q(x)</div>
+                  แก้หา $v$ โดยใช้ Integrating factor: $I(x) = e^{\int (1-n)P(x)\,dx}$<br>
+                  <strong style="color: var(--danger);">⚠️ คำเตือนสำคัญ: เมื่อได้ $v$ แล้ว อย่าลืมแทนกลับเป็น $y^{1-n}$ ถึงจะได้คะแนนเต็ม!</strong>
+                </li>
+              </ol>
+            </div>
+
+            <div class="cheat-box">
+              <strong>📝 ตัวอย่างข้อสอบ:</strong> $\frac{dy}{dx} + \frac{1}{x}y = x y^2$<br>
+              - ในที่นี้ $n = 2, P(x) = 1/x, Q(x) = x$<br>
+              - นำ $y^2$ หาร: $y^{-2}y' + \frac{1}{x}y^{-1} = x$<br>
+              - ให้ $v = y^{1-2} = y^{-1} \implies \frac{dv}{dx} = -y^{-2}\frac{dy}{dx}$<br>
+              - แทนค่าได้: $-\frac{dv}{dx} + \frac{1}{x}v = x \implies \frac{dv}{dx} - \frac{1}{x}v = -x$<br>
+              - $I(x) = e^{\int -\frac{1}{x}\,dx} = e^{-\ln x} = x^{-1} = \frac{1}{x}$<br>
+              - $v \cdot \frac{1}{x} = \int (-x)\left(\frac{1}{x}\right)\,dx = \int -1\,dx = -x + C$<br>
+              - $v = -x^2 + Cx \implies \mathbf{y^{-1} = \frac{1}{y} = -x^2 + Cx}$
+            </div>
+          </div>
+        </details>
+
+        <!-- 1c: Cauchy-Euler -->
+        <details>
+          <summary>1. c) Cauchy-Euler Equation Non-homogeneous (10 คะแนน)</summary>
+          <div class="details-content">
+            <div class="math-block">
+              รูปแบบมาตรฐาน: a x^2 \frac{d^2y}{dx^2} + b x \frac{dy}{dx} + c y = g(x)
+            </div>
+
+            <div class="zero-box">
+              <strong style="color: var(--accent-green);">💡 สังเกต Cauchy-Euler:</strong>
+              หน้า $y''$ มี $x^2$ คูณอยู่, หน้า $y'$ มี $x$ กำลัง 1 คูณอยู่, หน้า $y$ ไม่มี $x$ (กำลังตรงกับอันดับการดิฟ)
+            </div>
+
+            <div class="step-box">
+              <div class="step-num">Step 1: หา Homogeneous Solution ($y_h$) (ได้ฟรีๆ 5 คะแนน!)</div>
+              สมมติให้ $y = x^m$ แทนค่าลงในสมการ จะได้สมการช่วย (Auxiliary Eq.):
+              <div class="math-block">
+                a m(m - 1) + b m + c = 0 \iff a m^2 + (b - a)m + c = 0
+              </div>
+              แก้หาค่า $m$ จะมี 3 กรณี:
+              <ul style="margin-left: 20px; line-height: 1.8;">
+                <li><strong>กรณี 1 (รากจริงต่างกัน $m_1 \ne m_2$):</strong> $y_h = C_1 x^{m_1} + C_2 x^{m_2}$</li>
+                <li><strong>กรณี 2 (รากจริงซ้ำกัน $m_1 = m_2$):</strong> $y_h = C_1 x^{m_1} + C_2 x^{m_1}\ln x$</li>
+                <li><strong>กรณี 3 (รากเชิงซ้อน $\alpha \pm \beta i$):</strong> $y_h = x^\alpha [C_1 \cos(\beta \ln x) + C_2 \sin(\beta \ln x)]$</li>
+              </ul>
+            </div>
+
+            <div class="step-box">
+              <div class="step-num">Step 2: หา Particular Solution ($y_p$) ด้วย Variation of Parameters</div>
+              <div class="danger-box">
+                <strong style="color: var(--danger);">🚨 จุดตกม้าตายอันดับ 1 ของประเทศ:</strong><br>
+                ก่อนใช้สูตร Wronskian <strong>ต้องนำสัมประสิทธิ์หน้า $y''$ (คือ $a x^2$) ไปหารด้านขวาก่อนเสมอ!</strong>
+                <div class="math-block">f(x) = \frac{g(x)}{a x^2} \quad \text{(ถ้าไม่หารด้วย } ax^2 \text{ ผิดหมดทั้งข้อ!)}</div>
+              </div>
+
+              สูตร Wronskian และ $y_p$:
+              <div class="math-block">
+                W = \begin{vmatrix} y_1 & y_2 \\ y_1' & y_2' \end{vmatrix} = y_1 y_2' - y_1' y_2<br><br>
+                u_1 = -\int \frac{y_2 f(x)}{W}\,dx, \qquad u_2 = \int \frac{y_1 f(x)}{W}\,dx<br><br>
+                y_p = u_1 y_1 + u_2 y_2 \implies \mathbf{y = y_h + y_p}
+              </div>
+            </div>
+
+            <!-- Interactive Cauchy-Euler Calculator -->
+            <div class="solver-box">
+              <h4 style="color: var(--primary); margin-bottom: 8px;">🧮 เครื่องมือคำนวณรากสมการช่วย Cauchy-Euler ($a x^2 y'' + b x y' + c y = 0$)</h4>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">ลองใส่สัมประสิทธิ์ $a, b, c$ จากโจทย์ของคุณเพื่อดู $y_h$ ทันที:</p>
+              <div class="solver-input-row">
+                <label>a = <input type="number" id="ce-a" value="1"></label>
+                <label>b = <input type="number" id="ce-b" value="-3"></label>
+                <label>c = <input type="number" id="ce-c" value="3"></label>
+                <button class="solver-btn" onclick="solveCauchyEuler()">คำนวณ $y_h$</button>
+              </div>
+              <div id="ce-output" class="solver-output"></div>
+            </div>
+
+            <div class="cheat-box">
+              <strong>📝 ตัวอย่างจากข้อสอบจริงปี 2567 (ข้อ 1):</strong>
+              <div class="math-block">x^2 \frac{d^2y}{dx^2} - 3x \frac{dy}{dx} + 3y = 2x^4 e^x</div>
+              <strong>วิธีทำ:</strong><br>
+              - $a = 1, b = -3, c = 3$<br>
+              - สมการช่วย: $1m(m - 1) - 3m + 3 = 0 \implies m^2 - 4m + 3 = 0 \implies (m - 1)(m - 3) = 0$<br>
+              - รากคือ $m_1 = 1, m_2 = 3 \implies \mathbf{y_h = C_1 x + C_2 x^3}$ (ได้ $y_1 = x, y_2 = x^3$)<br>
+              - หารด้วย $x^2$: $f(x) = \frac{2x^4 e^x}{x^2} = 2x^2 e^x$<br>
+              - $W = (x)(3x^2) - (1)(x^3) = 2x^3$<br>
+              - $u_1 = -\int \frac{x^3 \cdot 2x^2 e^x}{2x^3}\,dx = -\int x^2 e^x\,dx = -(x^2 - 2x + 2)e^x$ (ใช้ DI method)<br>
+              - $u_2 = \int \frac{x \cdot 2x^2 e^x}{2x^3}\,dx = \int e^x\,dx = e^x$<br>
+              - $y_p = -(x^2 - 2x + 2)e^x(x) + (e^x)(x^3) = (2x^2 - 2x)e^x$<br>
+              <strong>คำตอบสมบูรณ์: $y = C_1 x + C_2 x^3 + (2x^2 - 2x)e^x$</strong>
+            </div>
+          </div>
+        </details>
+
+        <!-- 1d: Higher Order -->
+        <details>
+          <summary>1. d) Non-homogeneous Higher Order Equation (10 คะแนน)</summary>
+          <div class="details-content">
+            <div class="math-block">
+              รูปแบบ: a_n \frac{d^n y}{dx^n} + \dots + a_1 \frac{dy}{dx} + a_0 y = f(x)
+            </div>
+
+            <div class="step-box">
+              <div class="step-num">หลักการเลือกวิธีหา $y_p$ (เทียบสัมประสิทธิ์ vs แปรตัวแปรเสริม):</div>
+              <ul style="margin-left: 20px; line-height: 1.8;">
+                <li><strong>วิธีที่ 1: Undetermined Coefficients (เทียบสัมประสิทธิ์)</strong><br>
+                  ใช้ได้เฉพาะเมื่อ $f(x)$ เป็นพหุนาม $x^k$, เอกซ์โพเนนเชียล $e^{ax}$, ไซน์/โคไซน์ $\sin(kx), \cos(kx)$ หรือผลคูณของพวกนี้<br>
+                  <em>ถ้า $f(x)$ ซ้ำกับพจน์ใน $y_h$ ต้องคูณ $x$ หรือ $x^2$ เพิ่ม!</em>
+                </li>
+                <li><strong>วิธีที่ 2: Variation of Parameters (แปรตัวแปรเสริม)</strong><br>
+                  ใช้เมื่อ $f(x)$ เป็นฟังก์ชันเศษส่วนหรือตรีโกณอื่นๆ เช่น $\tan x, \sec x, \frac{e^x}{1 + e^x}$<br>
+                  เช่น ข้อสอบปี 66 ข้อ 2: $\frac{d^3y}{dx^3} - \frac{dy}{dx} = \frac{e^x}{1 + e^x}$ บังคับต้องใช้ Variation of Parameters
+                </li>
+              </ul>
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 4: MODULE 2 (20 MARKS)                 -->
+    <!-- ========================================== -->
+    <div id="mod2-tab" class="tab-pane" style="display:none;">
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap:wrap; gap:10px;">
+          <h2>ข้อ (2) Laplace Transform สำหรับ Initial Value Problem (20 คะแนน)</h2>
+          <span class="badge badge-warning">Step Input $f(t)$ + Second Shifting</span>
+        </div>
+
+        <div class="math-block">
+          โจทย์ต้นแบบ: a y'' + b y' + c y = f(t), \quad y(0) = y_0, \; y'(0) = y'_0<br>
+          โดยที่ $f(t)$ เป็นฟังก์ชันแบ่งช่วง (Piecewise Function)
+        </div>
+
+        <div class="zero-box">
+          <strong style="color: var(--accent-green);">💡 เข้าใจ Unit Step Function $u(t - c)$ ใน 1 นาที:</strong><br>
+          $u(t - c)$ เปรียบเหมือน <strong>"สวิตช์ไฟที่เปิดตอนเวลา $t = c$"</strong><br>
+          ถ้าต้องการให้ฟังก์ชัน $g(t)$ ทำงานเฉพาะช่วงเวลา $t_1 \le t < t_2$ ให้เขียนเป็น:
+          <div class="math-block">f(t) = g(t) [u(t - t_1) - u(t - t_2)]</div>
+        </div>
+
+        <div class="step-box">
+          <div class="step-num">Step 1: เขียน $f(t)$ ให้อยู่ในรูป Unit Step Function</div>
+          ตัวอย่าง (ข้อสอบจริงปี 66): $f(t) = \cos(2t)$ เมื่อ $\pi/4 \le t < \pi$ และเป็น $0$ ที่อื่น:<br>
+          <div class="math-block">f(t) = \cos(2t) [u(t - \pi/4) - u(t - \pi)] = \cos(2t)u(t - \pi/4) - \cos(2t)u(t - \pi)</div>
+        </div>
+
+        <div class="step-box">
+          <div class="step-num">Step 2: ทฤษฎีบทการเลื่อนที่สอง (Second Shifting Theorem)</div>
+          <div class="math-block">
+            \mathcal{L}\{ g(t) u(t - a) \} = e^{-as} \mathcal{L}\{ g(t + a) \}
+          </div>
+          เทคนิค: แทนค่า $t$ ในฟังก์ชัน $g(t)$ ด้วย $(t + a)$ แล้วจัดรูปตรีโกณมิติ:
+          <ul style="margin-left: 20px; line-height: 1.8;">
+            <li>$\cos(2(t + \pi/4)) = \cos(2t + \pi/2) = -\sin(2t) \implies \mathcal{L}\{-\sin(2t)\} = \frac{-2}{s^2 + 4}$</li>
+            <li>$\cos(2(t + \pi)) = \cos(2t + 2\pi) = \cos(2t) \implies \mathcal{L}\{\cos(2t)\} = \frac{s}{s^2 + 4}$</li>
+          </ul>
+        </div>
+
+        <div class="step-box">
+          <div class="step-num">Step 3: เทค Laplace แปลงทั้งสองข้างของสมการ</div>
+          สูตรสำเร็จที่ต้องจำ:
+          <div class="math-block">
+            \mathcal{L}\{y''\} = s^2 Y(s) - s y(0) - y'(0)<br>
+            \mathcal{L}\{y'\} = s Y(s) - y(0)<br>
+            \mathcal{L}\{y\} = Y(s)
+          </div>
+          แทนเงื่อนไขเริ่มต้น $y(0), y'(0)$ แล้วดึงตัวร่วมจัดรูปหา $Y(s)$
+        </div>
+
+        <div class="step-box">
+          <div class="step-num">Step 4: แยกเศษส่วนย่อย และ Inverse Laplace กลับ</div>
+          <div class="math-block">
+            \mathcal{L}^{-1}\{ e^{-as} F(s) \} = f(t - a) u(t - a)
+          </div>
+          ใช้สูตรแปลงกลับ:
+          $\mathcal{L}^{-1}\left\{\frac{1}{s^2 + \omega^2}\right\} = \frac{1}{\omega}\sin(\omega t), \quad \mathcal{L}^{-1}\left\{\frac{s}{s^2 + \omega^2}\right\} = \cos(\omega t)$
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 5: MODULE 3 (20 MARKS)                 -->
+    <!-- ========================================== -->
+    <div id="mod3-tab" class="tab-pane" style="display:none;">
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap:wrap; gap:10px;">
+          <h2>ข้อ (3) แปลงเป็นระบบสมการอันดับ 1 + Undetermined Coefficient (20 คะแนน)</h2>
+          <span class="badge badge-primary">State-Space System Representation</span>
+        </div>
+
+        <div class="zero-box">
+          <strong style="color: var(--accent-green);">💡 อย่ากลัวคำว่า State-Space! ข้อนี้มีสูตรจำรูปตายตัว:</strong><br>
+          ถ้าโจทย์ให้สมการอันดับ 2: $y'' + p y' + q y = f(t)$ คุณสามารถเขียนเมทริกซ์คำตอบบรรทัดแรกได้ทันทีโดยไม่ต้องคิด!
+        </div>
+
+        <div class="step-box">
+          <div class="step-num">Step 1: กำหนดตัวแปรสถานะ (State Variables)</div>
+          เขียนบรรทัดนี้ลงในกระดาษคำตอบเสมอ (ได้ 3-4 คะแนนทันที):
+          <div class="math-block">
+            x_1 = y<br>
+            x_2 = y' = x_1'<br>
+            x_2' = y'' = -q y - p y' + f(t) = -q x_1 - p x_2 + f(t)
+          </div>
+        </div>
+
+        <div class="step-box">
+          <div class="step-num">Step 2: เขียนในรูประบบเมทริกซ์ $\mathbf{x}' = A\mathbf{x} + \mathbf{F}(t)$</div>
+          <div class="math-block">
+            \begin{bmatrix} x_1' \\ x_2' \end{bmatrix} = \begin{bmatrix} 0 & 1 \\ -q & -p \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} + \begin{bmatrix} 0 \\ f(t) \end{bmatrix}
+          </div>
+          จำง่ายๆ: แถวแรกของ $A$ คือ $[0 \quad 1]$ เสมอ! แถวที่สองคือ $[-q \quad -p]$ (สลับตำแหน่งแล้วใส่เครื่องหมายลบ)
+        </div>
+
+        <div class="step-box">
+          <div class="step-num">Step 3: หา Complementary Solution ($\mathbf{x}_h$) ด้วย Eigenvalues & Eigenvectors</div>
+          <div class="math-block">
+            \det(A - \lambda I) = 0 \iff \begin{vmatrix} -\lambda & 1 \\ -q & -p-\lambda \end{vmatrix} = \lambda^2 + p\lambda + q = 0
+          </div>
+          แก้หาค่า $\lambda_1, \lambda_2$ (Eigenvalues)<br>
+          จากนั้นหา Eigenvector $\mathbf{v}$ จาก $(A - \lambda I)\mathbf{v} = \mathbf{0}$<br>
+          ผลเฉลยส่วนเติมเต็ม: $\mathbf{x}_h(t) = C_1 \mathbf{v}_1 e^{\lambda_1 t} + C_2 \mathbf{v}_2 e^{\lambda_2 t}$
+        </div>
+
+        <div class="step-box">
+          <div class="step-num">Step 4: หา Particular Solution ($\mathbf{x}_p$) ด้วย Undetermined Coefficients</div>
+          สมมติเวกเตอร์ $\mathbf{x}_p$ ตามรูปทรงของ $\mathbf{F}(t)$:
+          <ul style="margin-left: 20px; line-height: 1.8;">
+            <li>ถ้า $\mathbf{F}(t) = \begin{bmatrix} 0 \\ K \end{bmatrix}$ (ค่าคงที่) $\implies$ สมมติ $\mathbf{x}_p = \begin{bmatrix} a_1 \\ a_2 \end{bmatrix}$ (เวกเตอร์คงที่)</li>
+            <li>ถ้า $\mathbf{F}(t) = \begin{bmatrix} 0 \\ K e^{\alpha t} \end{bmatrix} \implies$ สมมติ $\mathbf{x}_p = \begin{bmatrix} a_1 \\ a_2 \end{bmatrix} e^{\alpha t}$</li>
+            <li>ถ้า $\mathbf{F}(t) = \begin{bmatrix} 0 \\ K t \end{bmatrix} \implies$ สมมติ $\mathbf{x}_p = \begin{bmatrix} a_1 \\ a_2 \end{bmatrix} t + \begin{bmatrix} b_1 \\ b_2 \end{bmatrix}$</li>
+          </ul>
+          นำ $\mathbf{x}_p$ และ $\mathbf{x}_p'$ ไปแทนใน $\mathbf{x}' = A\mathbf{x} + \mathbf{F}(t)$ แล้วแก้เทียบสัมประสิทธิ์หาค่า $a_1, a_2$
+        </div>
+
+        <!-- Interactive State Space Solver -->
+        <div class="solver-box">
+          <h4 style="color: var(--primary); margin-bottom: 8px;">🧮 เครื่องมือแปลง State-Space และหา Eigenvalues ($y'' + p y' + q y = 0$)</h4>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">กรอกสัมประสิทธิ์ $p$ และ $q$ เพื่อดูเมทริกซ์ $A$ และค่า $\lambda$ ทันที:</p>
+          <div class="solver-input-row">
+            <label>p (หน้า y') = <input type="number" id="ss-p" value="5"></label>
+            <label>q (หน้า y) = <input type="number" id="ss-q" value="6"></label>
+            <button class="solver-btn" onclick="solveStateSpace()">สร้างเมทริกซ์และหา $\lambda$</button>
+          </div>
+          <div id="ss-output" class="solver-output"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 6: MODULE 4 (20 MARKS)                 -->
+    <!-- ========================================== -->
+    <div id="mod4-tab" class="tab-pane" style="display:none;">
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap:wrap; gap:10px;">
+          <h2>ข้อ (4) วงจรไฟฟ้า RLC: Zero-State & Zero-Input (20 คะแนนเต็ม)</h2>
+          <span class="badge badge-success">Transient Circuit Analysis</span>
+        </div>
+
+        <!-- 4a: Initial Conditions -->
+        <details open>
+          <summary>4. a) หา Initial Conditions ภายในวงจร ($i_L(0^+), v_C(0^+), i_L'(0^+)$) (5 คะแนน)</summary>
+          <div class="details-content">
+            <div class="zero-box">
+              <strong style="color: var(--accent-green);">💡 กฎเหล็กฟิสิกส์วงจรสำหรับคนไม่เคยเรียนไฟฟ้า:</strong>
+              ที่เวลา $t < 0$ แหล่งจ่ายไฟตรง (DC) ต่ออยู่นานมากแล้ว วงจรอยู่ในภาวะคงตัว:
+              <ul style="margin-left: 20px; line-height: 1.8; margin-top: 6px;">
+                <li><strong>ขดลวดเหนี่ยวนำ ($L$):</strong> ทำตัวเป็น <strong>"เส้นลวดเปล่า (Short Circuit)"</strong> (แรงดันตกคร่อมเป็นศูนย์ $v_L = 0$) $\implies$ คำนวณหากระแสที่ไหลผ่านมัน $i_L(0^-)$</li>
+                <li><strong>ตัวเก็บประจุ ($C$):</strong> ประจุเต็ม ทำตัวเป็น <strong>"สายไฟขาด (Open Circuit)"</strong> (กระแสไหลผ่านเป็นศูนย์ $i_C = 0$) $\implies$ คำนวณหาแรงดันตกคร่อมมัน $v_C(0^-)$</li>
+              </ul>
+            </div>
+
+            <div class="step-box">
+              <div class="step-num">ความต่อเนื่องของกระแสและแรงดัน:</div>
+              พลังงานใน $L$ และ $C$ เปลี่ยนแปลงทันทีไม่ได้ ดังนั้น:
+              <div class="math-block">
+                i_L(0^+) = i_L(0^-) \qquad \text{และ} \qquad v_C(0^+) = v_C(0^-)
+              </div>
+              และหาอนุพันธ์เริ่มต้น $i_L'(0^+)$ จากความสัมพันธ์ของขดลวด:
+              <div class="math-block">
+                v_L = L \frac{di_L}{dt} \implies i_L'(0^+) = \left.\frac{di_L}{dt}\right|_{t=0^+} = \frac{v_L(0^+)}{L}
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- 4b: Circuit ODE -->
+        <details open>
+          <summary>4. b) เขียนสมการอนุพันธ์ในรูปกระแส $i_L(t)$ หรือแรงดัน $v_C(t)$ (5 คะแนน)</summary>
+          <div class="details-content">
+            <p>วิเคราะห์วงจรที่เวลา $t > 0$ (หลังสับสวิตช์):</p>
+            <ol style="margin-left: 20px; line-height: 1.8;">
+              <li>เขียนกฎกระแสของเคอร์ชอฟฟ์ (KCL) ที่โหนด หรือกฎแรงดัน (KVL) ในลูป</li>
+              <li>แทนความสัมพันธ์อุปกรณ์: $v_L = L \frac{di_L}{dt}, \quad i_C = C \frac{dv_C}{dt}$</li>
+              <li>จัดรูปจนได้สมการอนุพันธ์อันดับ 2 รูปแบบมาตรฐาน:</li>
+            </ol>
+            <div class="math-block">
+              \frac{d^2 i_L}{dt^2} + 2\alpha \frac{di_L}{dt} + \omega_0^2 i_L = F(t)
+            </div>
+          </div>
+        </details>
+
+        <!-- 4c: Zero Input & Zero State -->
+        <details open>
+          <summary>4. c) แก้หา Zero-Input, Zero-State และ Complete Response (10 คะแนน)</summary>
+          <div class="details-content">
+            <div class="grid-2">
+              <div class="cheat-box">
+                <h4 style="color: var(--primary); margin-bottom: 8px;">1. Zero-Input Response ($i_{zi}$)</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">
+                  (เกิดจากพลังงานสะสมเดิมล้วนๆ, ปิดแหล่งจ่ายภายนอกให้หมด $F(t) = 0$):
+                </p>
+                <div class="math-block">
+                  \frac{d^2 i_{zi}}{dt^2} + 2\alpha \frac{di_{zi}}{dt} + \omega_0^2 i_{zi} = 0
+                </div>
+                ใช้เงื่อนไขเริ่มต้นจริง:<br>
+                <code>i_zi(0) = i_L(0+)</code><br>
+                <code>i_zi'(0) = i_L'(0+)</code>
+              </div>
+
+              <div class="zero-box">
+                <h4 style="color: var(--accent-green); margin-bottom: 8px;">2. Zero-State Response ($i_{zs}$)</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">
+                  (เกิดจากแหล่งจ่ายภายนอกล้วนๆ, เงื่อนไขเริ่มต้นเดิมเป็นศูนย์ทั้งหมด):
+                </p>
+                <div class="math-block">
+                  \frac{d^2 i_{zs}}{dt^2} + 2\alpha \frac{di_{zs}}{dt} + \omega_0^2 i_{zs} = F(t)
+                </div>
+                ใช้เงื่อนไขเริ่มต้นเป็นศูนย์:<br>
+                <code>i_zs(0) = 0</code><br>
+                <code>i_zs'(0) = 0</code>
+              </div>
+            </div>
+
+            <div class="math-block" style="border-left-color: var(--accent-green); margin-top: 14px;">
+              ผลตอบสนองสมบูรณ์ (Complete Response):<br>
+              \mathbf{i_L(t) = i_{zi}(t) + i_{zs}(t)}
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 7: PAST EXAM ARCHIVE (2564-2567)       -->
+    <!-- ========================================== -->
+    <div id="past-exams-tab" class="tab-pane" style="display:none;">
+      <div class="card">
+        <h2>📚 คลังข้อสอบจริง 4 ปีย้อนหลัง (2564 - 2567) ครบทุกข้อ + เฉลยละเอียด</h2>
+        <p style="color: var(--text-muted); margin-bottom: 18px;">
+          รวบรวมข้อสอบไฟนอลตัวจริงของ ผศ.ดร. เมธา คงพูน สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง
+        </p>
+
+        <!-- Exam 2567 -->
+        <details open>
+          <summary>🔥 ข้อสอบปี 2567 (ล่าสุด): เฉลยครบทุกข้อ</summary>
+          <div class="details-content">
+            <div class="cheat-box">
+              <strong>[2567 ข้อ 1] Cauchy-Euler Non-homogeneous:</strong>
+              <div class="math-block">x^2 \frac{d^2y}{dx^2} - 3x \frac{dy}{dx} + 3y = 2x^4 e^x</div>
+              <strong>วิธีทำ:</strong><br>
+              1. สมการช่วย: $m(m-1) - 3m + 3 = 0 \implies m^2 - 4m + 3 = 0 \implies m = 1, 3$<br>
+              $y_h = C_1 x + C_2 x^3$ (โดยที่ $y_1 = x, y_2 = x^3$)<br>
+              2. นำ $x^2$ หารตลอด: $y'' - \frac{3}{x}y' + \frac{3}{x^2}y = 2x^2 e^x \implies f(x) = 2x^2 e^x$<br>
+              3. Wronskian: $W = x(3x^2) - 1(x^3) = 2x^3$<br>
+              4. $u_1 = -\int \frac{x^3 \cdot 2x^2 e^x}{2x^3}dx = -\int x^2 e^x dx = -(x^2 - 2x + 2)e^x$<br>
+              5. $u_2 = \int \frac{x \cdot 2x^2 e^x}{2x^3}dx = \int e^x dx = e^x$<br>
+              6. $y_p = -(x^2 - 2x + 2)e^x(x) + (e^x)(x^3) = (2x^2 - 2x)e^x$<br>
+              <strong>คำตอบสมบูรณ์: $y = C_1 x + C_2 x^3 + (2x^2 - 2x)e^x$</strong>
+            </div>
+
+            <div class="cheat-box" style="margin-top:12px;">
+              <strong>[2567 ข้อ 6] Exact & Integrating Factor:</strong>
+              <div class="math-block">(3xy - y^2)dx + x(x - y)dy = 0</div>
+              <strong>วิธีทำ:</strong><br>
+              $M = 3xy - y^2 \implies M_y = 3x - 2y$<br>
+              $N = x^2 - xy \implies N_x = 2x - y$<br>
+              $\frac{M_y - N_x}{N} = \frac{x - y}{x(x - y)} = \frac{1}{x} \implies \mu(x) = e^{\int \frac{1}{x}dx} = x$<br>
+              คูณ $x$ ตลอด: $(3x^2y - xy^2)dx + (x^3 - x^2y)dy = 0$<br>
+              $F(x,y) = \int (3x^2y - xy^2)dx = x^3y - \frac{1}{2}x^2y^2 + h(y)$<br>
+              $\frac{\partial F}{\partial y} = x^3 - x^2y + h'(y) = x^3 - x^2y \implies h'(y) = 0$<br>
+              <strong>คำตอบสมบูรณ์: $x^3y - \frac{1}{2}x^2y^2 = C$</strong>
+            </div>
+          </div>
+        </details>
+
+        <!-- Exam 2566 -->
+        <details>
+          <summary>🔥 ข้อสอบปี 2566: เฉลยครบทุกข้อ</summary>
+          <div class="details-content">
+            <div class="cheat-box">
+              <strong>[2566 ข้อ 3] Laplace Transform Initial Value Problem:</strong>
+              <div class="math-block">y'' + y = f(t), \quad y(0)=0, \; y'(0)=0</div>
+              โดย $f(t) = \cos(2t)$ เมื่อ $\pi/4 \le t < \pi$ และเป็น 0 นอกช่วง<br>
+              <strong>วิธีทำ:</strong><br>
+              1. $f(t) = \cos(2t)u(t - \pi/4) - \cos(2t)u(t - \pi)$<br>
+              2. Second Shifting: $\cos(2(t+\pi/4)) = \cos(2t+\pi/2) = -\sin(2t) \implies \mathcal{L} = \frac{-2 e^{-\pi s/4}}{s^2+4}$<br>
+              $\cos(2(t+\pi)) = \cos(2t+2\pi) = \cos(2t) \implies \mathcal{L} = \frac{s e^{-\pi s}}{s^2+4}$<br>
+              3. $(s^2+1)Y(s) = \frac{-2 e^{-\pi s/4}}{s^2+4} - \frac{s e^{-\pi s}}{s^2+4}$<br>
+              $Y(s) = \frac{-2 e^{-\pi s/4}}{(s^2+1)(s^2+4)} - \frac{s e^{-\pi s}}{(s^2+1)(s^2+4)}$<br>
+              4. เศษส่วนย่อย: $\frac{1}{(s^2+1)(s^2+4)} = \frac{1}{3}\left[\frac{1}{s^2+1} - \frac{1}{s^2+4}\right]$<br>
+              $\frac{s}{(s^2+1)(s^2+4)} = \frac{1}{3}\left[\frac{s}{s^2+1} - \frac{s}{s^2+4}\right]$<br>
+              5. Inverse แปลงกลับ: $\mathcal{L}^{-1} \implies$ ได้ผลคูณฟังก์ชันตรีโกณกับ $u(t-\pi/4)$ และ $u(t-\pi)$
+            </div>
+
+            <div class="cheat-box" style="margin-top:12px;">
+              <strong>[2566 ข้อ 2] Higher Order Variation of Parameters:</strong>
+              <div class="math-block">y''' - y' = \frac{e^x}{1 + e^x}</div>
+              <strong>วิธีทำ:</strong><br>
+              สมการช่วย: $m^3 - m = m(m-1)(m+1) = 0 \implies m = 0, 1, -1$<br>
+              $y_h = C_1 + C_2 e^x + C_3 e^{-x}$ (โดย $y_1 = 1, y_2 = e^x, y_3 = e^{-x}$)<br>
+              เนื่องจากด้านขวาเป็น $\frac{e^x}{1+e^x}$ ไม่ใช่พหุนามหรือตรีโกณเดี่ยว ต้องใช้สูตร Variation of Parameters Wronskian 3x3!
+            </div>
+          </div>
+        </details>
+
+        <!-- Exam 2565 -->
+        <details>
+          <summary>🔥 ข้อสอบปี 2565: Bernoulli & วงจร RLC</summary>
+          <div class="details-content">
+            <div class="cheat-box">
+              <strong>[2565 ข้อ 1] Exact Equation:</strong>
+              <div class="math-block">(3y + 2xy^2)dx + (2x + 2x^2y)dy = 0</div>
+              เช็ค $M_y = 3 + 4xy, N_x = 2 + 4xy \implies M_y - N_x = 1$<br>
+              $(M_y - N_x)/N$ หรือจัดกลุ่มเทอม: $(3ydx + 2xdy) + 2xy(ydx + xdy) = 0$
+            </div>
+            <div class="cheat-box" style="margin-top:12px;">
+              <strong>[2565 ข้อ 5] วงจร RLC ชั่วครู่:</strong>
+              สวิตช์ปิดที่ $t = 0$ หา $i_1(t)$<br>
+              - ที่ $t < 0$: วงจรอยู่ในภาวะคงตัว DC $\implies$ $C$ เปิดวงจร $v_C(0^-) = 0$<br>
+              - ที่ $t \ge 0$: สวิตช์ปิด เขียน KCL/KVL ตั้ง ODE อันดับ 2 แก้หา $i_{zi}$ และ $i_{zs}$
+            </div>
+          </div>
+        </details>
+
+        <!-- Exam 2564 -->
+        <details>
+          <summary>🔥 ข้อสอบปี 2564: ระบบสมการเชิงเส้น & Higher Order</summary>
+          <div class="details-content">
+            <div class="cheat-box">
+              <strong>[2564 ข้อ 4] Higher-Order Non-homogeneous:</strong>
+              <div class="math-block">y''' - 6y'' + 9y' = 3\cos x</div>
+              สมการช่วย: $m^3 - 6m^2 + 9m = m(m - 3)^2 = 0 \implies m = 0, 3, 3$<br>
+              $y_h = C_1 + C_2 e^{3x} + C_3 x e^{3x}$<br>
+              หา $y_p$: เนื่องจาก $f(x) = 3\cos x$ ไม่ซ้ำกับ $y_h$ ให้สมมติ $y_p = A\cos x + B\sin x$<br>
+              ดิฟแทนค่าแล้วเทียบสัมประสิทธิ์หา $A, B$ ได้คำตอบทันที!
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 8: DIAGNOSTIC MOCK EXAM (10 QUESTIONS) -->
+    <!-- ========================================== -->
+    <div id="quiz-tab" class="tab-pane" style="display:none;">
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap:wrap; gap:10px;">
+          <h2>🎯 ข้อสอบประเมินความพร้อมก่อนสอบจริง (10 ข้อตรงแนว Blueprint)</h2>
+          <span id="quiz-score-badge" class="badge badge-warning" style="font-size: 0.9rem;">คะแนน: 0 / 10</span>
+        </div>
+        <p style="color: var(--text-muted); margin-bottom: 20px;">
+          คลิกเลือกคำตอบที่คุณคิดว่าถูกต้อง ระบบจะเฉลยทันทีพร้อมอธิบายจุดลวง
+        </p>
+
+        <!-- Q1 -->
+        <div class="quiz-card" id="q1">
+          <p><strong>ข้อ 1:</strong> สำหรับสมการ Cauchy-Euler $2x^2 y'' - 3x y' + 2y = 4x^3$ ก่อนใช้สูตร Variation of Parameters หา $y_p$ ต้องกำหนด $f(x)$ เท่ากับเท่าใด?</p>
+          <button class="option-btn" onclick="checkAnswer('q1', 0, false)">A) $4x^3$</button>
+          <button class="option-btn" onclick="checkAnswer('q1', 1, true)">B) $2x$ (เนื่องจากต้องนำสัมประสิทธิ์ $2x^2$ หน้า $y''$ ไปหารด้านขวาเสมอ)</button>
+          <button class="option-btn" onclick="checkAnswer('q1', 2, false)">C) $4x$</button>
+          <button class="option-btn" onclick="checkAnswer('q1', 3, false)">D) $2x^3$</button>
+          <div class="explanation" style="display:none; margin-top: 10px; font-size: 0.88rem; color: var(--accent-green);">
+            ✓ ถูกต้อง! สูตร Variation of Parameters บังคับให้สัมประสิทธิ์หน้า $y''$ เป็น 1 จึงต้องหารด้วย $2x^2$ จะได้ $f(x) = \frac{4x^3}{2x^2} = 2x$
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="quiz-card" id="q2">
+          <p><strong>ข้อ 2:</strong> การแปลงสมการ Bernoulli $y' + P(x)y = Q(x)y^4$ ให้เป็นสมการเชิงเส้น ต้องสมมติตัวแปรใหม่ $v$ เป็นอะไร?</p>
+          <button class="option-btn" onclick="checkAnswer('q2', 0, false)">A) $v = y^4$</button>
+          <button class="option-btn" onclick="checkAnswer('q2', 1, false)">B) $v = y^3$</button>
+          <button class="option-btn" onclick="checkAnswer('q2', 2, true)">C) $v = y^{-3}$ (จากสูตร $v = y^{1-n}$ โดยที่ $n = 4$)</button>
+          <button class="option-btn" onclick="checkAnswer('q2', 3, false)">D) $v = y^{-4}$</button>
+          <div class="explanation" style="display:none; margin-top: 10px; font-size: 0.88rem; color: var(--accent-green);">
+            ✓ ถูกต้อง! ในที่นี้ $n = 4$ ดังนั้น $v = y^{1-4} = y^{-3}$
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="quiz-card" id="q3">
+          <p><strong>ข้อ 3:</strong> ในการวิเคราะห์วงจร RLC ที่เวลา $t < 0$ เมื่อต่อกับแหล่งจ่ายไฟตรง DC ตัวเหนี่ยวนำ ($L$) และตัวเก็บประจุ ($C$) จะมีสถานะอย่างไร?</p>
+          <button class="option-btn" onclick="checkAnswer('q3', 0, false)">A) $L$ เปิดวงจร, $C$ ลัดวงจร</button>
+          <button class="option-btn" onclick="checkAnswer('q3', 1, true)">B) $L$ ลัดวงจร (Short Circuit), $C$ เปิดวงจร (Open Circuit)</button>
+          <button class="option-btn" onclick="checkAnswer('q3', 2, false)">C) ทั้ง $L$ และ $C$ ลัดวงจร</button>
+          <button class="option-btn" onclick="checkAnswer('q3', 3, false)">D) ทั้ง $L$ และ $C$ เปิดวงจร</button>
+          <div class="explanation" style="display:none; margin-top: 10px; font-size: 0.88rem; color: var(--accent-green);">
+            ✓ ถูกต้อง! ที่ DC คงตัว ความถี่ $f = 0$ ทำให้ $L$ ทำตัวเป็นลวดเปล่า (Short) และ $C$ ประจุเต็มไม่ยอมให้กระแสผ่าน (Open)
+          </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="quiz-card" id="q4">
+          <p><strong>ข้อ 4:</strong> การหา Zero-State Response ($i_{zs}$) ในวงจรไฟฟ้า จะต้องกำหนดเงื่อนไขเริ่มต้น (Initial Conditions) อย่างไร?</p>
+          <button class="option-btn" onclick="checkAnswer('q4', 0, true)">A) กำหนด Initial Conditions ทั้งหมดเป็นศูนย์ ($i_L(0) = 0, i_L'(0) = 0$) และเปิดแหล่งจ่ายไว้</button>
+          <button class="option-btn" onclick="checkAnswer('q4', 1, false)">B) ปิดแหล่งจ่ายไฟให้หมด แล้วใช้ Initial Conditions จริง</button>
+          <button class="option-btn" onclick="checkAnswer('q4', 2, false)">C) ใช้ Initial Conditions จริง และเปิดแหล่งจ่ายไว้</button>
+          <button class="option-btn" onclick="checkAnswer('q4', 3, false)">D) คำนวณเฉพาะผลตอบสนองความถี่สูง</button>
+          <div class="explanation" style="display:none; margin-top: 10px; font-size: 0.88rem; color: var(--accent-green);">
+            ✓ ถูกต้อง! "Zero-State" แปลว่า สถานะเริ่มต้นเป็นศูนย์ทั้งหมด เกิดจากแรงกระตุ้นของแหล่งจ่ายภายนอกล้วนๆ
+          </div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="quiz-card" id="q5">
+          <p><strong>ข้อ 5:</strong> เมื่อแปลงสมการ $y'' + 4y' + 3y = 0$ เป็นระบบ State-Space $\mathbf{x}' = A\mathbf{x}$ โดยให้ $x_1 = y, x_2 = y'$ เมทริกซ์ $A$ คือข้อใด?</p>
+          <button class="option-btn" onclick="checkAnswer('q5', 0, true)">A) $\begin{bmatrix} 0 & 1 \\ -3 & -4 \end{bmatrix}$</button>
+          <button class="option-btn" onclick="checkAnswer('q5', 1, false)">B) $\begin{bmatrix} 0 & 1 \\ 3 & 4 \end{bmatrix}$</button>
+          <button class="option-btn" onclick="checkAnswer('q5', 2, false)">C) $\begin{bmatrix} 1 & 0 \\ -4 & -3 \end{bmatrix}$</button>
+          <button class="option-btn" onclick="checkAnswer('q5', 3, false)">D) $\begin{bmatrix} -4 & -3 \\ 1 & 0 \end{bmatrix}$</button>
+          <div class="explanation" style="display:none; margin-top: 10px; font-size: 0.88rem; color: var(--accent-green);">
+            ✓ ถูกต้อง! แถวแรกคือ $[0 \quad 1]$ เสมอ และแถวสองคือ $[-q \quad -p] = [-3 \quad -4]$
+          </div>
+        </div>
+
+        <!-- Q6 -->
+        <div class="quiz-card" id="q6">
+          <p><strong>ข้อ 6:</strong> ฟังก์ชันแบ่งช่วง $f(t) = 5$ เมื่อ $2 \le t < 7$ และเป็น $0$ นอกช่วง สามารถเขียนในรูป Unit Step Function ได้ตามข้อใด?</p>
+          <button class="option-btn" onclick="checkAnswer('q6', 0, false)">A) $5 u(t - 2)$</button>
+          <button class="option-btn" onclick="checkAnswer('q6', 1, true)">B) $5 [u(t - 2) - u(t - 7)]$</button>
+          <button class="option-btn" onclick="checkAnswer('q6', 2, false)">C) $5 [u(t - 7) - u(t - 2)]$</button>
+          <button class="option-btn" onclick="checkAnswer('q6', 3, false)">D) $5 u(t - 5)$</button>
+          <div class="explanation" style="display:none; margin-top: 10px; font-size: 0.88rem; color: var(--accent-green);">
+            ✓ ถูกต้อง! เปิดที่ $t = 2$ และปิดที่ $t = 7$ คือ $u(t - 2) - u(t - 7)$
+          </div>
+        </div>
+
+        <!-- Q7 -->
+        <div class="quiz-card" id="q7">
+          <p><strong>ข้อ 7:</strong> ค่าของ $\mathcal{L}\{y''\}$ ตามทฤษฎีบทการแปลงลาปลาซตรงกับข้อใด?</p>
+          <button class="option-btn" onclick="checkAnswer('q7', 0, true)">A) $s^2 Y(s) - s y(0) - y'(0)$</button>
+          <button class="option-btn" onclick="checkAnswer('q7', 1, false)">B) $s^2 Y(s) + s y(0) + y'(0)$</button>
+          <button class="option-btn" onclick="checkAnswer('q7', 2, false)">C) $s Y(s) - y(0)$</button>
+          <button class="option-btn" onclick="checkAnswer('q7', 3, false)">D) $s^2 Y(s) - y'(0)$</button>
+          <div class="explanation" style="display:none; margin-top: 10px; font-size: 0.88rem; color: var(--accent-green);">
+            ✓ ถูกต้อง! สูตรลาปลาซอนุพันธ์อันดับ 2 คือ $s^2 Y(s) - s y(0) - y'(0)$
+          </div>
+        </div>
+
+        <!-- Q8 -->
+        <div class="quiz-card" id="q8">
+          <p><strong>ข้อ 8:</strong> สำหรับสมการ Cauchy-Euler $x^2 y'' + 3x y' + y = 0$ สมการช่วย (Auxiliary Equation) คือข้อใด?</p>
+          <button class="option-btn" onclick="checkAnswer('q8', 0, false)">A) $m^2 + 3m + 1 = 0$</button>
+          <button class="option-btn" onclick="checkAnswer('q8', 1, true)">B) $m^2 + 2m + 1 = 0$ (จากสูตร $am^2 + (b-a)m + c = 0$ โดย $b-a = 3-1 = 2$)</button>
+          <button class="option-btn" onclick="checkAnswer('q8', 2, false)">C) $m^2 + 4m + 1 = 0$</button>
+          <button class="option-btn" onclick="checkAnswer('q8', 3, false)">D) $m^2 - 3m + 1 = 0$</button>
+          <div class="explanation" style="display:none; margin-top: 10px; font-size: 0.88rem; color: var(--accent-green);">
+            ✓ ถูกต้อง! สูตรคือ $am(m-1)+bm+c = 0 \implies m^2 - m + 3m + 1 = m^2 + 2m + 1 = 0$
+          </div>
+        </div>
+
+        <!-- Q9 -->
+        <div class="quiz-card" id="q9">
+          <p><strong>ข้อ 9:</strong> ถ้า $\frac{\partial M}{\partial y} \ne \frac{\partial N}{\partial x}$ และพบว่า $\frac{M_y - N_x}{N} = \frac{2}{x}$ ตัวประกอบปริพันธ์ $\mu(x)$ คือข้อใด?</p>
+          <button class="option-btn" onclick="checkAnswer('q9', 0, false)">A) $\mu(x) = 2x$</button>
+          <button class="option-btn" onclick="checkAnswer('q9', 1, true)">B) $\mu(x) = x^2$ (จาก $e^{\int \frac{2}{x}dx} = e^{2\ln x} = e^{\ln(x^2)} = x^2$)</button>
+          <button class="option-btn" onclick="checkAnswer('q9', 2, false)">C) $\mu(x) = \ln(2x)$</button>
+          <button class="option-btn" onclick="checkAnswer('q9', 3, false)">D) $\mu(x) = e^{2x}$</button>
+          <div class="explanation" style="display:none; margin-top: 10px; font-size: 0.88rem; color: var(--accent-green);">
+            ✓ ถูกต้อง! $e^{\int \frac{2}{x}dx} = e^{2\ln x} = x^2$
+          </div>
+        </div>
+
+        <!-- Q10 -->
+        <div class="quiz-card" id="q10">
+          <p><strong>ข้อ 10:</strong> ผลตอบสนองสมบูรณ์ (Complete Response) ของกระแสในวงจรไฟฟ้า $i_L(t)$ คำนวณจากข้อใด?</p>
+          <button class="option-btn" onclick="checkAnswer('q10', 0, true)">A) $i_L(t) = i_{zi}(t) + i_{zs}(t)$ (ผลบวกของ Zero-Input กับ Zero-State)</button>
+          <button class="option-btn" onclick="checkAnswer('q10', 1, false)">B) $i_L(t) = i_{zi}(t) \times i_{zs}(t)$</button>
+          <button class="option-btn" onclick="checkAnswer('q10', 2, false)">C) $i_L(t) = i_{zi}(t) - i_{zs}(t)$</button>
+          <button class="option-btn" onclick="checkAnswer('q10', 3, false)">D) $i_L(t) = \frac{i_{zi}(t)}{i_{zs}(t)}$</button>
+          <div class="explanation" style="display:none; margin-top: 10px; font-size: 0.88rem; color: var(--accent-green);">
+            ✓ ถูกต้อง! Complete Response = Zero-Input Response + Zero-State Response
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 9: PRINTABLE CHEAT SHEET (A4 READY)    -->
+    <!-- ========================================== -->
+    <div id="sheet-tab" class="tab-pane" style="display:none;">
+      
+      <div class="card btn-no-print" style="margin-bottom: 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap:wrap; gap:10px;">
+          <div>
+            <h2 style="color: var(--accent);">📝 แผ่นจดสูตร A4 เข้าห้องสอบ (Official Print Sheet)</h2>
+            <p style="color: var(--text-muted); font-size: 0.88rem;">
+              เนื้อหาจัดระเบียบ 2 คอลัมน์ ออกแบบให้พิมพ์ลงกระดาษ A4 หน้า-หลัง เพื่อนำเข้าห้องสอบได้ตามสิทธิ์ 1 แผ่น
+            </p>
+          </div>
+          <button onclick="window.print()" class="tab-btn"
+            style="background: var(--accent); color: #000; font-weight: bold; border:none; padding:10px 20px;">
+            🖨️ พิมพ์แผ่นนี้ (Print to PDF / Paper)
+          </button>
+        </div>
+      </div>
+
+      <div class="print-page">
+        <!-- Header for Exam Sheet -->
+        <div style="text-align: center; border-bottom: 2px solid #000; padding-bottom: 3px; margin-bottom: 6px;">
+          <h2 style="font-size: 10pt; margin: 0; font-weight: bold;">
+            กระดาษจดสูตรสอบไฟนอล 01046700 Engineering Mathematics 3 (ผศ.ดร. เมธา คงพูน)
+          </h2>
+          <div style="font-size: 8pt; display:flex; justify-content:space-between; margin-top:2px;">
+            <span>ชื่อ-สกุล: ..............................................................</span>
+            <span>รหัสนักศึกษา: .......................................</span>
+            <span>ตอนเรียน: ...........</span>
+          </div>
+        </div>
+
+        <div class="cheat-grid">
+          <!-- Column 1 -->
+          <div>
+            <!-- Box 1: Exact -->
+            <div class="cheat-section">
+              <div class="cheat-title">1. Exact & Integrating Factor (10 คะแนน)</div>
+              $M(x,y)dx + N(x,y)dy = 0$ เป็น Exact เมื่อ $\frac{\partial M}{\partial y} = \frac{\partial N}{\partial x}$<br>
+              • If $\frac{M_y - N_x}{N} = f(x) \implies \mathbf{\mu(x) = e^{\int f(x)dx}}$<br>
+              • If $\frac{N_x - M_y}{M} = g(y) \implies \mathbf{\mu(y) = e^{\int g(y)dy}}$<br>
+              คูณ $\mu$ ตลอดแล้วหา $F(x,y) = \int \mu M dx + h(y)$ โดย $\frac{\partial F}{\partial y} = \mu N \implies F(x,y) = C$
+            </div>
+
+            <!-- Box 2: Bernoulli -->
+            <div class="cheat-section">
+              <div class="cheat-title">2. Bernoulli Equation (10 คะแนน)</div>
+              $\frac{dy}{dx} + P(x)y = Q(x)y^n \implies$ หาร $y^n$ ทั้งสมการ<br>
+              กำหนดตัวแปร: $\mathbf{v = y^{1-n}} \implies \frac{dv}{dx} + (1-n)P(x)v = (1-n)Q(x)$<br>
+              Integrating Factor: $I(x) = e^{\int (1-n)P(x)dx}$<br>
+              สูตรคำตอบ: $v \cdot I(x) = \int (1-n)Q(x)I(x)dx + C \implies$ แทน $v = y^{1-n}$ กลับ
+            </div>
+
+            <!-- Box 3: Cauchy-Euler -->
+            <div class="cheat-section">
+              <div class="cheat-title">3. Cauchy-Euler Non-homogeneous (10 คะแนน)</div>
+              $a x^2 y'' + b x y' + c y = g(x) \implies$ ให้ $y = x^m$<br>
+              สมการช่วย: $\mathbf{a m^2 + (b - a)m + c = 0}$<br>
+              • ราก $m_1 \ne m_2$: $y_h = C_1 x^{m_1} + C_2 x^{m_2}$<br>
+              • รากซ้ำ $m_1 = m_2$: $y_h = C_1 x^{m_1} + C_2 x^{m_1}\ln x$<br>
+              • เชิงซ้อน $\alpha \pm \beta i$: $y_h = x^\alpha [C_1\cos(\beta \ln x) + C_2\sin(\beta \ln x)]$<br>
+              <strong>หา $y_p$ (Variation of Parameters):</strong><br>
+              หาร $ax^2$ ก่อน: $f(x) = \frac{g(x)}{ax^2}$ | $W = y_1 y_2' - y_1' y_2$<br>
+              $y_p = -y_1 \int \frac{y_2 f(x)}{W}dx + y_2 \int \frac{y_1 f(x)}{W}dx \implies y = y_h + y_p$
+            </div>
+
+            <!-- Box 4: State Space System -->
+            <div class="cheat-section">
+              <div class="cheat-title">4. Second-Order State Space System (20 คะแนน)</div>
+              $y'' + py' + qy = f(t) \implies$ ให้ $x_1 = y, x_2 = y'$<br>
+              $\begin{bmatrix} x_1' \\ x_2' \end{bmatrix} = \begin{bmatrix} 0 & 1 \\ -q & -p \end{bmatrix}\begin{bmatrix} x_1 \\ x_2 \end{bmatrix} + \begin{bmatrix} 0 \\ f(t) \end{bmatrix} \iff \mathbf{x}' = A\mathbf{x} + \mathbf{F}(t)$<br>
+              • Eigenvalues: $\det(A - \lambda I) = \lambda^2 + p\lambda + q = 0$<br>
+              • Eigenvectors: $(A - \lambda_i I)\mathbf{v}_i = \mathbf{0} \implies \mathbf{x}_h = C_1 \mathbf{v}_1 e^{\lambda_1 t} + C_2 \mathbf{v}_2 e^{\lambda_2 t}$<br>
+              • สมมติ $\mathbf{x}_p$: ค่าคงที่ $\mathbf{a}$, เอกซ์โพเนนเชียล $\mathbf{a}e^{\alpha t}$, หรือเชิงเส้น $\mathbf{a}t+\mathbf{b}$
+            </div>
+          </div>
+
+          <!-- Column 2 -->
+          <div>
+            <!-- Box 5: Laplace -->
+            <div class="cheat-section">
+              <div class="cheat-title">5. Laplace Transform & Step Functions (20 คะแนน)</div>
+              $\mathcal{L}\{y''\} = s^2 Y(s) - s y(0) - y'(0), \quad \mathcal{L}\{y'\} = s Y(s) - y(0)$<br>
+              • Unit Step: $f(t)[u(t-a) - u(t-b)]$<br>
+              • <strong>2nd Shifting:</strong> $\mathcal{L}\{g(t)u(t-a)\} = e^{-as}\mathcal{L}\{g(t+a)\}$<br>
+              • <strong>Inv Shifting:</strong> $\mathcal{L}^{-1}\{e^{-as}F(s)\} = f(t-a)u(t-a)$<br>
+              <strong>ตารางคู่แปลง Laplace พื้นฐาน:</strong><br>
+              $\mathcal{L}\{1\} = \frac{1}{s}, \quad \mathcal{L}\{t^n\} = \frac{n!}{s^{n+1}}, \quad \mathcal{L}\{e^{at}\} = \frac{1}{s-a}$<br>
+              $\mathcal{L}\{\cos \omega t\} = \frac{s}{s^2+\omega^2}, \quad \mathcal{L}\{\sin \omega t\} = \frac{\omega}{s^2+\omega^2}$<br>
+              $\mathcal{L}\{e^{at}\cos \omega t\} = \frac{s-a}{(s-a)^2+\omega^2}, \quad \mathcal{L}\{e^{at}\sin \omega t\} = \frac{\omega}{(s-a)^2+\omega^2}$
+            </div>
+
+            <!-- Box 6: Circuit RLC -->
+            <div class="cheat-section">
+              <div class="cheat-title">6. RLC Circuit: Zero-State & Zero-Input (20 คะแนน)</div>
+              <strong>Initial Conditions ($t < 0$, DC Steady):</strong><br>
+              • ตัวเหนี่ยวนำ ($L$) = ลัดวงจร (Short Circuit) $\implies$ หา $i_L(0^-)$<br>
+              • ตัวเก็บประจุ ($C$) = เปิดวงจร (Open Circuit) $\implies$ หา $v_C(0^-)$<br>
+              • ความต่อเนื่อง: $i_L(0^+) = i_L(0^-), \; v_C(0^+) = v_C(0^-)$<br>
+              • อนุพันธ์เริ่มต้น: $i_L'(0^+) = \frac{v_L(0^+)}{L}$<br>
+              <strong>รูปแบบ ODE ($t > 0$):</strong> $\frac{d^2 i_L}{dt^2} + 2\alpha \frac{di_L}{dt} + \omega_0^2 i_L = F(t)$<br>
+              • <strong>Zero-Input ($i_{zi}$):</strong> ปิดแหล่งจ่าย $F(t) = 0$ ใช้เงื่อนไขจริง $i_L(0^+), i_L'(0^+)$<br>
+              • <strong>Zero-State ($i_{zs}$):</strong> เปิดแหล่งจ่าย มี $F(t)$ ใช้เงื่อนไขศูนย์ $i(0) = 0, i'(0) = 0$<br>
+              • <strong>Complete Response:</strong> $\mathbf{i_L(t) = i_{zi}(t) + i_{zs}(t)}$
+            </div>
+
+            <!-- Box 7: Fast Math Hacks -->
+            <div class="cheat-section">
+              <div class="cheat-title">7. Quick Math Hacks (สูตรโกงช่วยชีวิต)</div>
+              • $e^{\ln A} = A, \quad e^{-\ln A} = \frac{1}{A}, \quad e^{k\ln x} = x^k$<br>
+              • $\det \begin{bmatrix} a & b \\ c & d \end{bmatrix} = ad - bc$<br>
+              • สมการกำลังสอง: $m = \frac{-b \pm \sqrt{b^2-4ac}}{2a}$<br>
+              • $\int x^2 e^x dx = (x^2 - 2x + 2)e^x$ (ใช้ DI Method)
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script>
+    // Tab Switching
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-pane').forEach(el => el.style.display = 'none');
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+      const activePane = document.getElementById(tabId + '-tab');
+      if (activePane) activePane.style.display = 'block';
+
+      const buttons = document.querySelectorAll('.tab-btn');
+      buttons.forEach(btn => {
+        if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(tabId)) {
+          btn.classList.add('active');
+        }
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // Trigger KaTeX render on visible tab
+      if (window.renderMathInElement) {
+        renderMathInElement(document.body, {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+          ],
+          throwOnError: false
+        });
+      }
+    }
+
+    // Web Audio Chime when timer ends
+    function playChime() {
+      try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5
+        osc.frequency.setValueAtTime(880, audioCtx.currentTime + 0.15); // A5
+        gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.8);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.8);
+      } catch(e) {}
+    }
+
+    // Pomodoro Timer
+    let timerDuration = 50 * 60;
+    let timerInterval = null;
+    let isRunning = false;
+
+    function updateTimerDisplay() {
+      const minutes = Math.floor(timerDuration / 60);
+      const seconds = timerDuration % 60;
+      document.getElementById('timer-display').innerText =
+        `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    }
+
+    function startTimer() {
+      if (isRunning) return;
+      isRunning = true;
+      timerInterval = setInterval(() => {
+        if (timerDuration > 0) {
+          timerDuration--;
+          updateTimerDisplay();
+        } else {
+          clearInterval(timerInterval);
+          isRunning = false;
+          playChime();
+          alert('⏰ หมดเวลาการอ่านสำหรับรอบนี้แล้ว! พักสายตาและดื่มน้ำ 5-10 นาทีครับ');
+        }
+      }, 1000);
+    }
+
+    function pauseTimer() {
+      clearInterval(timerInterval);
+      isRunning = false;
+    }
+
+    function resetTimer(mins) {
+      pauseTimer();
+      timerDuration = mins * 60;
+      updateTimerDisplay();
+    }
+
+    // Task & Progress Tracker
+    function toggleTask(element, score) {
+      const checkbox = element.querySelector('input[type="checkbox"]');
+      if (event.target !== checkbox) {
+        checkbox.checked = !checkbox.checked;
+      }
+      element.classList.toggle('completed', checkbox.checked);
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const tasks = document.querySelectorAll('.task-item input[type="checkbox"]');
+      let total = 0;
+      let checkedCount = 0;
+      tasks.forEach(t => {
+        if (t.checked) checkedCount++;
+        total++;
+      });
+
+      const percent = Math.round((checkedCount / total) * 100);
+      document.getElementById('progress-bar').style.width = percent + '%';
+      document.getElementById('ready-percent').innerText = percent + '%';
+
+      const approximateScore = Math.min(100, Math.round((checkedCount / (total - 1)) * 100));
+      document.getElementById('ready-score').innerText = isNaN(approximateScore) ? 0 : approximateScore;
+
+      const statusEl = document.getElementById('status-message');
+      if (approximateScore < 40) {
+        statusEl.innerHTML = '⚠️ สถานะ: ยังไม่ปลอดภัย (เสี่ยง F)! เร่งเก็บ Cauchy-Euler และ Bernoulli ด่วน';
+        statusEl.style.color = '#fca5a5';
+      } else if (approximateScore < 65) {
+        statusEl.innerHTML = '⚡ สถานะ: โอกาสผ่านสูง (ระดับ C / C+)! เพิ่ม State-Space และ RLC อีกนิดจะได้ B';
+        statusEl.style.color = '#fde047';
+      } else {
+        statusEl.innerHTML = '🎉 สถานะ: มั่นใจได้เลย (ระดับ B+ / A)! พร้อมเข้าห้องสอบแล้ว';
+        statusEl.style.color = '#86efac';
+      }
+    }
+
+    // Emergency Answer Templates Generator
+    const templates = {
+      ce: `แบบฟอร์มเขียนตอบ ข้อ 1(c) Cauchy-Euler (เก็บ 6-10 แต้ม):
+-----------------------------------------------------------------
+1. จากสมการ: a x² y'' + b x y' + c y = g(x)
+2. หา Homogeneous Solution (y_h):
+   สมมติให้ y = x^m
+   เขียนสมการช่วย: a m(m - 1) + b m + c = 0
+   จัดรูปเป็น: a m² + (b - a)m + c = 0
+   แก้หาค่า m: m₁, m₂ = ...
+   ตอบ: y_h = C₁ x^(m₁) + C₂ x^(m₂)   (ถ้า m ซ้ำ: C₁ x^m + C₂ x^m ln x)
+3. หา Particular Solution (y_p) ด้วย Variation of Parameters:
+   หารตลอดด้วย a x² เพื่อให้สัมประสิทธิ์หน้า y'' เป็น 1:
+   y'' + [b/(ax)] y' + [c/(ax²)] y = f(x) โดยที่ f(x) = g(x) / (a x²)
+   คำนวณ Wronskian: W = y₁ y₂' - y₁' y₂
+   u₁ = - ∫ (y₂ f(x) / W) dx
+   u₂ = ∫ (y₁ f(x) / W) dx
+   y_p = u₁ y₁ + u₂ y₂
+4. สรุปคำตอบทั่วไป: y(x) = y_h(x) + y_p(x)`,
+
+      bern: `แบบฟอร์มเขียนตอบ ข้อ 1(b) Bernoulli Equation (เก็บ 6-10 แต้ม):
+-----------------------------------------------------------------
+1. จัดรูปมาตรฐาน: dy/dx + P(x) y = Q(x) y^n
+   (ระบุค่า: P(x) = ..., Q(x) = ..., n = ...)
+2. นำ y^n หารตลอดทั้งสองข้าง:
+   y^(-n) (dy/dx) + P(x) y^(1-n) = Q(x)
+3. กำหนดตัวแปรใหม่:
+   ให้ v = y^(1-n)
+   ดิฟเทียบ x: dv/dx = (1 - n) y^(-n) (dy/dx)
+   หรือ y^(-n) (dy/dx) = [1 / (1 - n)] (dv/dx)
+4. แทนกลับในสมการ:
+   dv/dx + (1 - n)P(x) v = (1 - n)Q(x)
+5. หา Integrating Factor:
+   I(x) = e^(∫ (1 - n)P(x) dx)
+6. คำนวณหา v:
+   v · I(x) = ∫ (1 - n)Q(x) I(x) dx + C
+7. แทน v = y^(1-n) กลับ:
+   y^(1-n) = [1 / I(x)] · [ ∫ (1 - n)Q(x) I(x) dx + C ]`,
+
+      exact: `แบบฟอร์มเขียนตอบ ข้อ 1(a) Exact & Integrating Factor (เก็บ 6-10 แต้ม):
+-----------------------------------------------------------------
+1. กำหนดสมการ: M(x, y) dx + N(x, y) dy = 0
+   โดย M(x, y) = ..., N(x, y) = ...
+2. ตรวจสอบความเป็น Exact:
+   ∂M/∂y = ...
+   ∂N/∂x = ...
+   ตรวจสอบ: ∂M/∂y ≠ ∂N/∂x (ยังไม่เป็น Exact)
+3. หาตัวประกอบปริพันธ์ (Integrating Factor μ):
+   คำนวณ: [ (∂M/∂y) - (∂N/∂x) ] / N = f(x)
+   ดังนั้น μ(x) = e^(∫ f(x) dx) = ...
+4. คูณ μ(x) เข้าทั้งสองข้างของสมการ:
+   [μ M] dx + [μ N] dy = 0   (เป็น Exact แล้ว)
+5. หาผลเฉลย F(x, y) = C:
+   F(x, y) = ∫ (μ M) dx + h(y) = ... + h(y)
+   หา h(y) โดยดิฟเทียบ y: ∂F/∂y = μ N ==> h'(y) = ... ==> h(y) = ...
+6. สรุปคำตอบ: F(x, y) = C`,
+
+      ss: `แบบฟอร์มเขียนตอบ ข้อ 3 State-Space & Undetermined Coeff. (เก็บ 10-15 แต้ม):
+-----------------------------------------------------------------
+1. กำหนดตัวแปรสถานะ (State Variables):
+   x₁ = y
+   x₂ = y' = x₁'
+   x₂' = y'' = -q y - p y' + f(t) = -q x₁ - p x₂ + f(t)
+2. เขียนในรูประบบเมทริกซ์ x' = A x + F(t):
+   [ x₁' ]   [  0    1 ] [ x₁ ]   [   0  ]
+   [ x₂' ] = [ -q   -p ] [ x₂ ] + [ f(t) ]
+3. หา Complementary Solution (x_h):
+   สมการคุณลักษณะ: det(A - λI) = 0 ==> λ² + pλ + q = 0
+   แก้หาค่าเจาะจง (Eigenvalues): λ₁ = ..., λ₂ = ...
+   หาเวกเตอร์เจาะจง (Eigenvectors): (A - λ_i I) v_i = 0 ==> v₁, v₂
+   x_h(t) = C₁ v₁ e^(λ₁ t) + C₂ v₂ e^(λ₂ t)
+4. หา Particular Solution (x_p) ด้วย Undetermined Coefficients:
+   สมมติ x_p(t) ตามรูป F(t) เช่น x_p = [a₁, a₂]ᵀ
+   แทนลงใน x_p' = A x_p + F(t) แล้วเทียบสัมประสิทธิ์หาค่า a₁, a₂
+5. คำตอบสมบูรณ์: x(t) = x_h(t) + x_p(t) และผลเฉลย y(t) = x₁(t)`,
+
+      laplace: `แบบฟอร์มเขียนตอบ ข้อ 2 Laplace Transform IVP (เก็บ 10-15 แต้ม):
+-----------------------------------------------------------------
+1. เขียนฟังก์ชันช่วง f(t) ในรูป Unit Step:
+   f(t) = g(t) [u(t - a) - u(t - b)] = g(t) u(t - a) - g(t) u(t - b)
+2. หา ℒ{f(t)} ด้วยทฤษฎีบทการเลื่อนที่สอง (Second Shifting):
+   ℒ{ g(t) u(t - a) } = e^(-as) ℒ{ g(t + a) }
+3. เทค Laplace ทั้งสองข้างของสมการ:
+   ℒ{y''} + p ℒ{y'} + q ℒ{y} = ℒ{f(t)}
+   [s² Y(s) - s y(0) - y'(0)] + p [s Y(s) - y(0)] + q Y(s) = F(s)
+4. แทนเงื่อนไขเริ่มต้น y(0), y'(0) แล้วแก้หา Y(s):
+   (s² + ps + q) Y(s) = F(s) + ...
+   Y(s) = [F(s) + ...] / (s² + ps + q)
+5. แยกเศษส่วนย่อย (Partial Fraction Decomposition)
+6. เทค Inverse Laplace: y(t) = ℒ⁻¹{Y(s)}
+   โดยใช้สูตร ℒ⁻¹{e^(-as) G(s)} = g(t - a) u(t - a)`,
+
+      rlc: `แบบฟอร์มเขียนตอบ ข้อ 4 วงจรไฟฟ้า RLC (เก็บ 10-15 แต้ม):
+-----------------------------------------------------------------
+1. หา Initial Conditions ที่เวลา t < 0 (DC Steady State):
+   - ตัวเหนี่ยวนำ L เป็น Short Circuit (ลัดวงจร) ==> คำนวณหากระแส i_L(0⁻)
+   - ตัวเก็บประจุ C เป็น Open Circuit (เปิดวงจร) ==> คำนวณหาแรงดัน v_C(0⁻)
+   อาศัยความต่อเนื่อง: i_L(0⁺) = i_L(0⁻),  v_C(0⁺) = v_C(0⁻)
+   หาอนุพันธ์เริ่มต้น: i_L'(0⁺) = v_L(0⁺) / L
+2. สร้างสมการอนุพันธ์ที่เวลา t > 0:
+   ใช้ KCL/KVL จัดรูปหา ODE ของ i_L(t):
+   d²i_L/dt² + 2α (di_L/dt) + ω₀² i_L = F(t)
+3. Zero-Input Response (i_zi):
+   แก้สมการเอกพันธุ์: d²i_zi/dt² + 2α (di_zi/dt) + ω₀² i_zi = 0
+   โดยใช้ Initial Conditions จริง: i_zi(0) = i_L(0⁺), i_zi'(0) = i_L'(0⁺)
+4. Zero-State Response (i_zs):
+   แก้สมการไม่เอกพันธุ์: d²i_zs/dt² + 2α (di_zs/dt) + ω₀² i_zs = F(t)
+   โดยใช้ Initial Conditions เป็นศูนย์: i_zs(0) = 0, i_zs'(0) = 0
+5. คำตอบสมบูรณ์: i_L(t) = i_zi(t) + i_zs(t)`
+    };
+
+    function showTemplate(type) {
+      document.getElementById('template-display').innerText = templates[type] || '';
+    }
+
+    // Interactive Cauchy Euler Solver
+    function solveCauchyEuler() {
+      const a = parseFloat(document.getElementById('ce-a').value);
+      const b = parseFloat(document.getElementById('ce-b').value);
+      const c = parseFloat(document.getElementById('ce-c').value);
+
+      if (isNaN(a) || isNaN(b) || isNaN(c) || a === 0) {
+        alert('กรุณากรอกค่า a, b, c ให้ถูกต้อง (a ต้องไม่เป็น 0)');
+        return;
+      }
+
+      const B = b - a;
+      const disc = B * B - 4 * a * c;
+      const outputEl = document.getElementById('ce-output');
+      outputEl.style.display = 'block';
+
+      let explanation = `<strong>ขั้นตอนการคำนวณสมการช่วย:</strong><br>`;
+      explanation += `สมการช่วย: ${a}m(m - 1) + (${b})m + (${c}) = 0<br>`;
+      explanation += `จัดรูป: ${a}m² + (${B})m + (${c}) = 0<br>`;
+      explanation += `Discriminant D = (${B})² - 4(${a})(${c}) = ${disc}<br><br>`;
+
+      if (disc > 0) {
+        const m1 = (-B + Math.sqrt(disc)) / (2 * a);
+        const m2 = (-B - Math.sqrt(disc)) / (2 * a);
+        explanation += `<strong style="color:#38bdf8;">กรณี 1: รากจริงต่างกัน</strong> m₁ = ${m1.toFixed(2)}, m₂ = ${m2.toFixed(2)}<br>`;
+        explanation += `<strong>คำตอบ y_h:</strong> <span style="color:#10b981; font-weight:bold;">y_h = C₁ x^(${m1.toFixed(2)}) + C₂ x^(${m2.toFixed(2)})</span>`;
+      } else if (disc === 0) {
+        const m = -B / (2 * a);
+        explanation += `<strong style="color:#f59e0b;">กรณี 2: รากจริงซ้ำกัน</strong> m₁ = m₂ = ${m.toFixed(2)}<br>`;
+        explanation += `<strong>คำตอบ y_h:</strong> <span style="color:#10b981; font-weight:bold;">y_h = C₁ x^(${m.toFixed(2)}) + C₂ x^(${m.toFixed(2)}) ln(x)</span>`;
+      } else {
+        const alpha = -B / (2 * a);
+        const beta = Math.sqrt(-disc) / (2 * a);
+        explanation += `<strong style="color:#a855f7;">กรณี 3: รากเชิงซ้อน</strong> α = ${alpha.toFixed(2)}, β = ${beta.toFixed(2)}<br>`;
+        explanation += `<strong>คำตอบ y_h:</strong> <span style="color:#10b981; font-weight:bold;">y_h = x^(${alpha.toFixed(2)}) [C₁ cos(${beta.toFixed(2)} ln x) + C₂ sin(${beta.toFixed(2)} ln x)]</span>`;
+      }
+
+      outputEl.innerHTML = explanation;
+    }
+
+    // Interactive State Space Solver
+    function solveStateSpace() {
+      const p = parseFloat(document.getElementById('ss-p').value);
+      const q = parseFloat(document.getElementById('ss-q').value);
+
+      if (isNaN(p) || isNaN(q)) {
+        alert('กรุณากรอกค่า p และ q ให้ถูกต้อง');
+        return;
+      }
+
+      const disc = p * p - 4 * q;
+      const outputEl = document.getElementById('ss-output');
+      outputEl.style.display = 'block';
+
+      let res = `<strong>1. ตัวแปรสถานะ:</strong> x₁ = y, x₂ = y'<br>`;
+      res += `<strong>2. ระบบเมทริกซ์ x' = A x + F(t):</strong><br>`;
+      res += `[x₁']   [  0    1 ] [x₁]   [  0  ]<br>`;
+      res += `[x₂'] = [ ${-q}   ${-p} ] [x₂] + [ f(t) ]<br><br>`;
+      res += `<strong>3. สมการคุณลักษณะ:</strong> det(A - λI) = λ² + (${p})λ + (${q}) = 0<br>`;
+
+      if (disc >= 0) {
+        const l1 = (-p + Math.sqrt(disc)) / 2;
+        const l2 = (-p - Math.sqrt(disc)) / 2;
+        res += `Eigenvalues: λ₁ = ${l1.toFixed(2)}, λ₂ = ${l2.toFixed(2)}<br>`;
+        res += `<strong>Eigenvectors:</strong> v₁ = [1, ${l1.toFixed(2)}]ᵀ, v₂ = [1, ${l2.toFixed(2)}]ᵀ<br>`;
+        res += `<strong>ผลเฉลย x_h(t):</strong> <span style="color:#10b981; font-weight:bold;">x_h(t) = C₁ [1, ${l1.toFixed(2)}]ᵀ e^(${l1.toFixed(2)}t) + C₂ [1, ${l2.toFixed(2)}]ᵀ e^(${l2.toFixed(2)}t)</span>`;
+      } else {
+        const real = -p / 2;
+        const imag = Math.sqrt(-disc) / 2;
+        res += `Eigenvalues (เชิงซ้อน): λ = ${real.toFixed(2)} ± ${imag.toFixed(2)}i<br>`;
+      }
+
+      outputEl.innerHTML = res;
+    }
+
+    // Quiz Check Logic
+    let quizScore = 0;
+    const answered = {};
+
+    function checkAnswer(qId, selectedIdx, isCorrect) {
+      if (answered[qId]) return;
+      answered[qId] = true;
+
+      const qCard = document.getElementById(qId);
+      const buttons = qCard.querySelectorAll('.option-btn');
+
+      if (isCorrect) {
+        buttons[selectedIdx].classList.add('correct');
+        quizScore++;
+      } else {
+        buttons[selectedIdx].classList.add('wrong');
+        buttons.forEach(b => {
+          if (b.getAttribute('onclick').includes('true')) {
+            b.classList.add('correct');
+          }
+        });
+      }
+
+      qCard.querySelector('.explanation').style.display = 'block';
+      document.getElementById('quiz-score-badge').innerText = `คะแนน: ${quizScore} / 10`;
+    }
+
+    // Initial Math render on load
+    window.addEventListener('DOMContentLoaded', () => {
+      showTemplate('ce');
+      if (window.renderMathInElement) {
+        renderMathInElement(document.body, {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+          ],
+          throwOnError: false
+        });
+      }
+    });
+  </script>
+</body>
+</html>
