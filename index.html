@@ -534,7 +534,11 @@
             01046700 Math III: ระบบเรียนรู้ฉุกเฉินสำหรับผู้ไม่มีความรู้ที่ต้องสอบพรุ่งนี้
           </h1>
         </div>
-        <div style="display: flex; gap: 10px; align-items: center;">
+        <div style="display: flex; gap: 10px; align-items: center; flex-wrap:wrap;">
+          <button onclick="document.getElementById('qr-modal').style.display='flex'" class="tab-btn"
+            style="background: rgba(56, 189, 248, 0.15); color: var(--primary); border: 1px solid var(--primary); font-weight: 600;">
+            📱 เข้าผ่านมือถือ / QR Code
+          </button>
           <button onclick="switchTab('sheet'); setTimeout(() => window.print(), 300)" class="tab-btn"
             style="background: var(--accent); color: #000; font-weight: 700; border: none; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);">
             🖨️ พิมพ์แผ่นสูตร A4 เข้าห้องสอบ
@@ -1697,6 +1701,26 @@
     </div>
 
   </main>
+
+  <!-- QR Code Modal -->
+  <div id="qr-modal" class="btn-no-print" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.75); z-index:9999; justify-content:center; align-items:center; backdrop-filter:blur(6px);" onclick="if(event.target===this) this.style.display='none'">
+    <div style="background:#1e293b; border:1px solid var(--border); border-radius:16px; padding:24px; max-width:440px; width:92%; text-align:center; box-shadow:0 10px 25px rgba(0,0,0,0.5);">
+      <h3 style="color:#38bdf8; margin-bottom:8px;">📱 สแกนเปิดบนมือถือ / iPad</h3>
+      <p style="font-size:0.88rem; color:#94a3b8; margin-bottom:14px;">เชื่อมต่อ Wi-Fi เดียวกัน แล้วใช้กล้องมือถือสแกน QR Code ด้านล่างนี้:</p>
+      <div style="background:#fff; padding:12px; border-radius:12px; display:inline-block; margin-bottom:14px;">
+        <img src="server_qr.png" alt="QR Code" style="width:200px; height:200px; display:block;" onerror="this.alt='กรุณาพิมพ์ URL ด้านล่าง'">
+      </div>
+      <div style="background:#0b1120; padding:10px; border-radius:8px; border:1px solid #334155; margin-bottom:10px; font-family:'JetBrains Mono', monospace; font-size:0.9rem;">
+        <div style="color:#94a3b8; font-size:0.75rem; margin-bottom:2px;">URL ภายในวงแลน / Wi-Fi เดียวกัน:</div>
+        <a href="http://192.168.1.167:8000" target="_blank" style="color:#38bdf8; text-decoration:none; font-weight:bold;">http://192.168.1.167:8000</a>
+      </div>
+      <div style="background:#0b1120; padding:10px; border-radius:8px; border:1px solid #334155; margin-bottom:14px; font-family:'JetBrains Mono', monospace; font-size:0.85rem;">
+        <div style="color:#94a3b8; font-size:0.75rem; margin-bottom:2px;">URL ผ่าน Tailscale (เข้าจากนอกบ้าน/เน็ตมือถือ):</div>
+        <a href="http://100.95.211.79:8000" target="_blank" style="color:#10b981; text-decoration:none; font-weight:bold;">http://100.95.211.79:8000</a>
+      </div>
+      <button onclick="document.getElementById('qr-modal').style.display='none'" class="solver-btn" style="width:100%; padding:10px;">ปิดหน้าต่างนี้</button>
+    </div>
+  </div>
 
   <script>
     // Tab Switching
